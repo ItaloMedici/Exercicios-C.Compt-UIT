@@ -46,7 +46,7 @@ void printTree(Node *root){
     }
 }
 
-long mediaTree(Node *root){
+/* long mediaTree(Node *root){
     long sum=0;
     long count=0;
     if(root != NULL){
@@ -57,6 +57,31 @@ long mediaTree(Node *root){
     }
     return (sum/count);
 }
+ */
+ 
+int count(Node *root){
+    int cL=0, cR=0;
+    if(root == NULL){
+        return 0;
+    }
+    cL = count(root->Left);
+    cR = count(root->Right);
+
+    return(cR + cL + 1);
+}
+
+int somaTree(Node *root){
+    int sL=0, sR=0;
+    int count=0;
+    if(root == NULL){
+        return 0;
+    }
+    sL = somaTree(root->Left);
+    sR = somaTree(root->Right);
+
+    return(root->Reg.Chave + sL + sR);
+}
+
 
 
 int main (){
@@ -66,10 +91,10 @@ int main (){
     Registro y;
     Registro z;
     Registro o;
-    x.Chave = 1;
-    y.Chave = 2;
-    z.Chave = 3;
-    o.Chave = 4;
+    x.Chave = 12;
+    y.Chave = 15;
+    z.Chave = 5;
+    o.Chave = 8;
 
     root = insertTree(root, x);
     root = insertTree(root, y);
@@ -78,8 +103,8 @@ int main (){
 
 
     printTree(root);
-
-    printf("\n\n%d", mediaTree(root));
+    
+    printf("\nMedia da arvore: %d", somaTree(root)/count(root));
 
     printf("\n\n");
     system("PAUSE");

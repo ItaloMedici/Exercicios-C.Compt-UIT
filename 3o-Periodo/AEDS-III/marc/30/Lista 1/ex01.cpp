@@ -34,7 +34,7 @@ void Insere(Registro x, No **p) {
         (*p)->Reg = x;
         (*p)->Esq = NULL;
         (*p)->Dir = NULL;
-        return;
+        return; 
     }
     if (x.Chave < (*p)->Reg.Chave){
         Insere(x, &(*p)->Esq);
