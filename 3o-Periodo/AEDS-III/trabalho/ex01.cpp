@@ -1,107 +1,79 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include<list>
+#include<algorithm>
 
-void getOddList(int size, double list[], double oddsList[]){
-    int countNums = 0;
-    int auxI = 0;
-    int auxJ = 0;
-        
-    for(int i=0; i<size; i++){
-        auxI = list[i];
+using namespace std;
 
-        for(int j=0; j<size; j++){
-            auxJ = list[j];
-
-            if(auxI == auxJ){
-                countNums++;
-            }
-        }
-        //Se for par eu adiciono o numero na lista de impares, se não eu coloco um numero negativo
-        if(countNums%2 == 1) oddsList[i] = list[i];
-        else oddsList[i] = -1;
-        printf("-----> %d, %d, %d\n", oddsList[i], list[i], countNums);
-
-        countNums = 0;
-    }
+list<double> addNumList(list<double> list, double num){
+    list.push_back(num);
+    return list;
 }
 
-void printOdds(double list[], int size){
-    for(int i=0; i<size; i++){
-        if(list[i] > 0) printf("\t%i\n", list[i]);
-    }
-}
-
-
-int main(void){
-    int sizeList = 2;
-    double list[sizeList] = {1,2};
-    double oddsList[sizeList];
+bool isNumExist(list<double> list, double num){
+    std::list<double>::iterator pont;
     
-    getOddList(sizeList, list, oddsList);
-    printOdds(oddsList, sizeList);
+    pont = find(list.begin(), list.end(), num);
 
-    system("PAUSE");
-    return 0;
+    if(num == *pont) return true;
+    return false;
 }
 
-/* 
-#include<stdlib.h>
-#include<stdio.h>
+list<double> getOddList(list<double> oldList, list<double> newList){
+    for(auto auxI : oldList){
+        int countOdd = 0;
 
-void getOddList(int size, double list[], double oddsList[]){
-    int countNums = 0;
-    int auxI = 0;
-    int auxJ = 0;
-        
-    for(int i=0; i<size; i++){
-        auxI = list[i];
-
-        for(int j=0; j<size; j++){
-            auxJ = list[j];
-
-            if(auxI == auxJ){
-                countNums++;
+        for(auto auxJ : oldList){
+            if(auxJ == auxI){
+                countOdd++;
             }
         }
-        //Se for par eu adiciono o numero na lista de impares, se não eu coloco um numero negativo
-        if(countNums%2 == 1) oddsList[i] = list[i];
-        else oddsList[i] = -1;
 
-        countNums = 0;
+        if(countOdd%2 != 0 && !isNumExist(newList, auxI)){
+            newList.push_back(auxI);
+        }
+    }
+    return newList;
+}
+
+void printList(list<double> list){
+    for(auto aux : list){
+        printf("  %d  ", aux);
     }
 }
 
-void printOdds(double list[], int size){
-    for(int i=0; i<size; i++){
-        if(list[i] > 0) printf("\t%i\n", list[i]);
-    }
-}
-
-
-int main(void){
-    int sizeList = -1;
+int main (void) {
+    int sizeList = 0;
+    double auxNum = 0;
+    list<double> oddslist;
+    list<double> list;
 
     do{
-        printf("Quantas casas serão a lista: ");
-        scanf("%d", &sizeList);
+        list.clear();
+        oddslist.clear();
 
-        double list[sizeList];
-        double oddsList[sizeList];
-        
-        for(int i=0; i<sizeList; i++){
-            do{
-                printf("Digite o %io numero: ", i+1);
-                scanf("%i", &list[i]);
-            } while(list[i] < 0);
+        printf("\nDigite o tamanho da lista: ");
+        scanf("%i", &sizeList);
+
+        for(int i = 0; i < sizeList; i++){
+            printf("\nDigite o %d numero: ", i+1);
+            scanf("%d", &auxNum);
+
+            list = addNumList(list, auxNum);
         }
-        
-        getOddList(sizeList, list, oddsList);
-        printOdds(oddsList, sizeList);
 
-    } while(sizeList != 0);
-    
+        printf("Sua lista: ");
+        printList(list);
 
-    system("PAUSE");
+        oddslist = getOddList(list, oddslist);
+
+        printf("\nLista de numeros sem par: ");
+        printList(oddslist);
+
+        printf("\n");
+
+    } while(sizeList>0);
+
+    system("pause");
     return 0;
 }
- */
