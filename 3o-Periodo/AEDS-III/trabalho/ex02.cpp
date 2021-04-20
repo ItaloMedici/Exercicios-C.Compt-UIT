@@ -1,5 +1,4 @@
 #include<stdlib.h>
-#include<cstdlib>
 #include<stdio.h>
 #include<vector>
 #include<string>
@@ -14,13 +13,13 @@ vector<string> addToList(vector<string> vect, string item){
 
 void printList(vector<string> vect){
     for(int idx = 0; idx<vect.size(); idx++){
-        printf(" %s ", vect[idx].c_str());
+        cout << "  " << vect[idx] << "  ";
     }
 }
 
 bool existThisItem(vector<string> vect, string item){
-    for(int idx = 0; idx<vect.size(); idx++){
-        if(vect[idx] == item) return true;
+    for(int i = 0; i<vect.size(); i++){
+        if(vect[i] == item) return true;
     }
     return false;
 }
