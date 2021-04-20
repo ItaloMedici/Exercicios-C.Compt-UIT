@@ -19,6 +19,10 @@ void printVec(vector<string> list){
 int main(void){
     vector<string> produtos;
 
+    produtos.push_back("um");
+    produtos.push_back("dois");
+    produtos.push_back("tres");
+
     printVec(produtos);
 
     system("pause");
