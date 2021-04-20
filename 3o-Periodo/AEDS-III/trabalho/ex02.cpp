@@ -1,4 +1,5 @@
 #include<stdlib.h>
+#include<cstdlib>
 #include<stdio.h>
 #include<vector>
 #include<string>
@@ -28,7 +29,10 @@ bool existThisItem(vector<string> vect, string item){
 int main(void){
     vector<string> product;
     string nameItem;
-    int numLists = 2;
+    int numLists;
+
+    printf("Quantas listas serão: ");
+    scanf("%d", &numLists);
 
     for(int i=0; i<numLists; i++){    
         product.clear();
@@ -43,7 +47,7 @@ int main(void){
 
             if(!existThisItem(product, nameItem)){
                 product = addToList(product, nameItem);
-            };
+            }
             
             printf("\n");
 
