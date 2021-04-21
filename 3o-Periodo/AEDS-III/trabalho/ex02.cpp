@@ -30,7 +30,7 @@ int main(void){
     string nameItem;
     int numLists;
 
-    printf("Quantas listas serão: ");
+    printf("Quantas listas serao: ");
     scanf("%d", &numLists);
 
     for(int i=0; i<numLists; i++){    
@@ -39,9 +39,9 @@ int main(void){
         printf("\t----------< Lista %d >----------\n", i+1);
 
         do{
-            printf("Digite o nome do produto (Para sair digite \"quit\" )\nR.: ");
+            cout << "Digite o nome do produto (Para sair digite \"quit\" )\nR.: ";
             cin >> nameItem;
-
+        
             if(nameItem == "quit") continue;
 
             if(!existThisItem(product, nameItem)){
