@@ -46,7 +46,7 @@ int main () {
     scanf("%i", &numerosSorteados[i]);
 
     int cartelasVencedoras[qtdCartelas];
-    int bingos = 0;
+    int bingos = -1;
 
     // Verificamos toda matriz
     for(int j = 0; j<qtdCartelas; j++){
@@ -62,18 +62,25 @@ int main () {
         somaLinha += mtzCartelas[j][k];
       }
 
-      // Caso a linha seja zerada temos um bingo 
+      /* Caso a linha seja zerada temos um bingo.
+       * Então somamos nossa variável de bingos e no respectivo index 
+       * será adicionado a cartela vencedora em nosso vetor.
+       */
       if(somaLinha == 0) {
         bingos++;
         cartelasVencedoras[bingos] = j+1;
       }
     }
 
-    if(bingos > 0) {
-      for(int l = 0; l < bingos; l++){
-        printf("\nCartela Vencedora: %d\n--->%i\n---->%i", cartelasVencedoras[l], bingos, sizeof(cartelasVencedoras));
-        return 0;
+    /* Caso haja bingos entramos em um loop imprimindo todas as 
+     * cartelas vencedoras e então encerramos o programa  
+     */ 
+    if(bingos > -1) {
+      for(int l = 0; l <= bingos; l++){
+        printf("\nCartela Vencedora: %i", cartelasVencedoras[l]);
       }
+
+      return 0;
     }
   }
 
