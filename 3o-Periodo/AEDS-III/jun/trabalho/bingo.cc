@@ -45,7 +45,8 @@ int main () {
     printf("\nDigite os numeros sorteados: ");
     scanf("%i", &numerosSorteados[i]);
 
-    int cartelasVencedoras[qtdCartelas], bingos;
+    int cartelasVencedoras[qtdCartelas];
+    int bingos = 0;
 
     // Verificamos toda matriz
     for(int j = 0; j<qtdCartelas; j++){
@@ -60,9 +61,17 @@ int main () {
         // Somamos a linha da matriz
         somaLinha += mtzCartelas[j][k];
       }
+
       // Caso a linha seja zerada temos um bingo 
       if(somaLinha == 0) {
-        printf("\n\nCartela Vencedora: %i", j+1);
+        bingos++;
+        cartelasVencedoras[bingos] = j+1;
+      }
+    }
+
+    if(bingos > 0) {
+      for(int l = 0; l < bingos; l++){
+        printf("\nCartela Vencedora: %d\n--->%i\n---->%i", cartelasVencedoras[l], bingos, sizeof(cartelasVencedoras));
         return 0;
       }
     }
