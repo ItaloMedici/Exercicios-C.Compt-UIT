@@ -10,7 +10,7 @@ bool isNumExists(int *vetor, int num, int size) {
 
 void getOdds(int *origin, int *odds, int size) {
     for(int i=0; i<size; i++) {
-        int count = 0;
+        int count = 0; 
 
         for(int j=0; j<size; j++) {
             origin[i] == origin[j] ? count++ : 0 ;
@@ -18,6 +18,9 @@ void getOdds(int *origin, int *odds, int size) {
  
         int idx = 0;
         if(count%2 != 0 && !isNumExists(odds, origin[i], size)) {
+            odds[idx] = origin[i];
+            idx++;
+            
             printf(" %d ", origin[i]);
         }
     }
@@ -28,6 +31,7 @@ int main () {
 
     do {
         scanf("%d", &qntd);
+        printf("\n--> nuM: %d\n", qntd);
         int nums[qntd];
 
         for(int i=0; i<qntd; i++) {
