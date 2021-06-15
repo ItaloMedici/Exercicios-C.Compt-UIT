@@ -31,7 +31,7 @@ int main () {
 
     do {
         scanf("%d", &qntd);
-        printf("\n--> nuM: %d\n", qntd);
+        //printf("\n--> nuM: %d\n", qntd);
         int nums[qntd];
 
         for(int i=0; i<qntd; i++) {
