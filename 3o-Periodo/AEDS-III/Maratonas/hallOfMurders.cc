@@ -55,10 +55,11 @@ int main() {
     assasins[indx].status.id = indx + 1;
     
     scanf("%s", nomes);
-    if(strcmp(nomes, "FIM") == 0) 
+    if(strcmp(nomes, "FIM") == 0){ 
       break;
-    else if (!containsName(nomes, assasins, indx)) {} 
+    } else if (!containsName(nomes, assasins, indx)){
       strcpy(assasins[indx].killer, nomes);
+    }
     /* else  */
       // adicionar uma pesquisa de id para não haver duplicatas do mesmo assasino
     scanf("%s", nomes);
