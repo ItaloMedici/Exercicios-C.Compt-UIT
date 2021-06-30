@@ -100,6 +100,7 @@ class Pessoa:Data {
     }
 
     void printPessoa() {
+      system("cls||clear");
       cout << "Nome: "    <<  nome    << endl
            << "Edereco: " << endereco << endl
            << "Idade: "   << idade    << endl
@@ -118,13 +119,29 @@ int main() {
   dt = time(NULL);
   tm diaAtual = *localtime(&dt); 
 
-  string nome = "Italo Medici";
-  string endereco = "Itauna";
-  int dia = 9;
-  int mes = 9;
-  int ano = 2001;
+  string nome;
+  string endereco;
+  int dia;
+  int mes;
+  int ano;
   int idade;
-  
+
+  cout << "Nome: ";
+  cin >> nome;
+
+  cout << "Endereco: ";
+  cin >> endereco;
+
+  cout << "Dia de nascimento: ";
+  cin >> dia;
+
+  cout << "Mes (numero do mes): ";
+  cin >> mes;
+
+  cout << "Ano: ";
+  cin >> ano;
+
+
   pessoa.setNome(nome);
   pessoa.setEndereco(endereco);
   pessoa.setNascimento(dia, mes, ano);
