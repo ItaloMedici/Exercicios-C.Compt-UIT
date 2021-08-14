@@ -101,9 +101,9 @@ class Pessoa:Data {
 
     void printPessoa() {
       system("cls||clear");
-      cout << "Nome: "    <<  nome    << endl
-           << "Edereco: " << endereco << endl
-           << "Idade: "   << idade    << endl
+      cout << "Nome: "       <<  nome    << endl
+           << "Edereco: "    << endereco << endl
+           << "Idade: "      << idade    << endl
            << "Nascimento: " << nascimento.getDia() <<"/"<< nascimento.getMes() <<"/"<<nascimento.getAno();
     }
 };
