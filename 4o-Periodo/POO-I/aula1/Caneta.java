@@ -18,10 +18,11 @@ public class Caneta {
     }
 
     public void usar(){
-        uso++;
         if (uso == 5) {
             temTinta = false;
+            return;
         }
+        uso++;
     }
 
     public void zerarUso() {
