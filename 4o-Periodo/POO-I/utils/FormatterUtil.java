@@ -10,11 +10,11 @@ import java.util.Date;
  */
 
 public class FormatterUtil {
-    private static final String DUAS_CASAS = "#,###0.00";
+    private static final String DUAS_CASAS = "#,##0.00";
     private static final String CURRECY = "¤#,##0.00;¤-#,##0.00";
     private static final String DD_MM_YYYY = "dd/MM/yyyy";;
 
-    public static String formatarNumero(Double numero) {
+    public static String formatarNumeroDuasCasas(Double numero) {
         if(numero == null) return "";
 
         DecimalFormat d = new DecimalFormat(DUAS_CASAS);
@@ -36,6 +36,20 @@ public class FormatterUtil {
         SimpleDateFormat sd = new SimpleDateFormat(DD_MM_YYYY);
         return sd.format(data);
     }
-    public FormatterUtil() {
+
+    public static String comPorcentagem(Double num){
+        return formatarNumeroDuasCasas(num) + "%";
+    }
+
+    public static String formatarTelefone(String telefone) {
+        String tel2 = "";
+
+        if(telefone.length()==11) {
+            tel2 = "(" + telefone.substring( 0, 2 ) + ") "
+            + telefone.substring( 2, 7 ) + "-"
+            + telefone.substring( 7, 11 );
+        }
+        
+        return tel2;
     }
 }
