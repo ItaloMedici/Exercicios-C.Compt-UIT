@@ -1,5 +1,6 @@
 package aula2.exercicios.produto;
 
+// Lib customizada
 import utils.FormatterUtil;
 
 public class Produto {

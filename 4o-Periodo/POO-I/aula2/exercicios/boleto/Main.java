@@ -1,6 +1,7 @@
 package aula2.exercicios.boleto;
 
 import java.util.Date;
+// Lib customizada
 import utils.FormatterUtil;
 
 public class Main {
