@@ -1,3 +1,5 @@
+package aula4.exercicios.celular;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -70,7 +72,7 @@ public class Celular {
   }
 
   public void aumentarVolume() {
-    if (!isLigado() || nivelSom > 100) {
+    if (!isLigado() || nivelSom >= 100) {
       System.out.println("Sem bateria ou volume máximo");
       return;
     }
@@ -119,11 +121,12 @@ public class Celular {
   }
 
   public void printCelular() {
-    System.out.println("\tFicha Técnica"
+    System.out.println("\n\tFicha Técnica"
       + "\nModelo: " + modelo
       + "\nNível da bateria: " + nivelBateria + "%"
-      + "\nNivel do som" + nivelSom + "%"
+      + "\nNivel do som: " + nivelSom + "%"
       + "\nCelular " + (ligado ? "ligado" : "desligado")
+      + "\n"
     );
   }
 
