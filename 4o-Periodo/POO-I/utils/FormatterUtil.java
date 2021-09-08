@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.ExecutionException;
 
 /**
  *
@@ -57,22 +56,42 @@ public class FormatterUtil {
                 } else {
                     return tempDate;
                 }
-            } 
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        
+
         return null;
     }
-    
+
     // Formatadores de String
     public static String formatarTelefone(String telefone) {
         String tel2 = "";
 
         if (telefone.length() == 11) {
-            tel2 = "(" + telefone.substring(0, 2) + ") " + telefone.substring(2, 7) + "-" + telefone.substring(7, 11);
+            tel2 = "(" + telefone.substring(0, 2) + ") " 
+            + telefone.substring(2, 7) + "-" 
+            + telefone.substring(7, 11);
         }
 
         return tel2;
+    }
+
+    public String formatarDocumentos(String documento) {
+
+        String cpf = documento.substring(0, 3) + "."
+        + documento.substring(3, 6) + "."
+        + documento.substring(6, 9) + "-"
+        + documento.substring(9, 11);
+        
+        String cnpj = documento.length() == 14
+        ? documento.substring(0, 2) + "."
+        + documento.substring(2, 5) + "."
+        + documento.substring(5, 8) + "/"
+        + documento.substring(8, 12) + "-"
+        + documento.substring(12, 14) 
+        : documento;
+
+        return documento.length() == 11 ? cpf : cnpj;
     }
 }
