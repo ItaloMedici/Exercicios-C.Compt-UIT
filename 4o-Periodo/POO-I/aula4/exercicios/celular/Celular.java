@@ -80,7 +80,7 @@ public class Celular {
   }
 
   public void diminuirVolume() {
-    if (!isLigado() || nivelSom < 0) {
+    if (!isLigado() || nivelSom <= 0) {
       System.out.println("Sem bateria ou volume zerado");
       return;
     }
