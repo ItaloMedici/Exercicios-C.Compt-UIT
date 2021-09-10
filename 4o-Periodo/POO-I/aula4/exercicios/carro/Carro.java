@@ -1,5 +1,3 @@
-package aula4.exercicios.carro;
-
 /**
  * Criar um projeto de carro (novamente), onde, quando acelerar o carro, caso
  * ele entre na reserva (10% ou menos do tanque), avisar o usuário. Criar o

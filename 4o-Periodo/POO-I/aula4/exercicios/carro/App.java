@@ -1,5 +1,3 @@
-package aula4.exercicios.carro;
-
 import java.util.Scanner;
 
 public class App {

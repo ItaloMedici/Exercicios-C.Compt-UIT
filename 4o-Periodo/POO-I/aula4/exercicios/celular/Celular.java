@@ -1,5 +1,3 @@
-package aula4.exercicios.celular;
-
 import java.util.Random;
 import java.util.Scanner;
 
