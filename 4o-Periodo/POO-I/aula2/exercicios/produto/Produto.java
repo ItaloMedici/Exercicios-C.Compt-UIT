@@ -43,7 +43,8 @@ public class Produto {
     }
 
     public Double calcMargemLucro(){
-        return precoVenda > 0 && precoCusto > 0 ? precoVenda - precoCusto : 0d;
+        margemLucro = precoVenda > 0 && precoCusto > 0 ? precoVenda - precoCusto : 0d;
+        return margemLucro;
     }
 
 

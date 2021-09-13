@@ -6,7 +6,6 @@ public class Main {
     Scanner entrada = new Scanner(System.in);
 
     Honda civic = new Honda(50d, 200d, 4, 1.6d, "Civic R", 2022, "FFFFFFF", 57000d, "08/07/2021", false);
-    Honda city = new Honda();
 
 /*     System.out.println("Modelo do carro: "); 
     city.setModelo(entrada.next());
@@ -49,6 +48,6 @@ public class Main {
     
 
 
-
+    entrada.close();
   }
 }

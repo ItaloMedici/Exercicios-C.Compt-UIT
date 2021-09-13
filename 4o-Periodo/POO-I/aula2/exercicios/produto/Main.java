@@ -19,5 +19,7 @@ public class Main {
             Produto p1 = new Produto(nome, precoCusto, precoVenda);
             p1.printProduto();
         }
+
+        s.close();
     }
 }
