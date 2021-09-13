@@ -1,4 +1,4 @@
-package lista2.Trabalhador;
+package listas.lista2.Trabalhador;
 
 import java.util.ArrayList;
 import java.util.List;

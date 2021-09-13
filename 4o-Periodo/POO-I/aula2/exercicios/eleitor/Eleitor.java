@@ -13,8 +13,6 @@ public class Eleitor {
   private Integer titulo;
 
   private final Integer idadeMinima = 16;
-  private final Integer idadeMaxima = 65;
-  private final Integer maiorIdade = 18;
 
   public String getNome() {
     return nome;
