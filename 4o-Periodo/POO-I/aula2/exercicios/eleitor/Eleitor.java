@@ -53,7 +53,7 @@ public class Eleitor {
   // 16 -> 18 -> 65
   public void checarVotacao() {
     if(idade >= 16){
-      if(idade >= 18 || idade <= 65) {
+      if(idade >= 18 && idade <= 65) {
         System.out.println("Voto obrigatório!");
       } else {
         System.out.println("Pode votar, porém sem obrigação!");
