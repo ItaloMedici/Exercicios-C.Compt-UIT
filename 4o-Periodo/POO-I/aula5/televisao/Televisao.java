@@ -31,12 +31,12 @@ public class Televisao {
   }
 
   public void aumentarVolume() {
-    if (!ligada && volumeAtual >= volumeMaximo) return;
+    if (!ligada || volumeAtual >= volumeMaximo) return;
     volumeAtual++;
   }
 
   public void abaixarVolume() {
-    if (!ligada && volumeAtual <= volumeMaximo) return;
+    if (!ligada || volumeAtual <= 0d) return;
     volumeAtual--;
   }
 
@@ -66,6 +66,10 @@ public class Televisao {
 
   public void ligarTv() {
     ligada = true;
+  }
+
+  public void desligarTv() {
+    ligada = false;
   }
 
   public Integer getCanalAtual() {
@@ -98,12 +102,29 @@ public class Televisao {
   }
 
   public void procurarCanal(Integer canalAtual) {
+    if (canalAtual > quantidadeCanais || canalAtual < 0) {
+      System.out.println("Canal não existente");
+      return;
+    }
     this.canalAtual = canalAtual;
+  }
+
+  
+
+  @Override
+  public String toString() {
+    return ""
+      + "\nMarca: " + marcaTv 
+      + "\nCanal Atual: " + canalAtual 
+      + "\nQuantidade de Canais: " + quantidadeCanais
+      + "\nVolume Atual: " + volumeAtual  + "%"
+      + "\nVolume Máximo: " + volumeMaximo
+      + "\nTelevisão " + (ligada ? "Ligada" : "Desliagada" );
   }
 
   private Televisao() {
     ligada = false;
-    canalAtual = 0;
+    canalAtual = 1;
     volumeAtual = 0d;
   }
   
