@@ -1,6 +1,7 @@
 package listas.lista2.Boleto;
 
 import java.util.Date;
+import java.util.Objects;
 
 import utils.FormatterUtil;
 
@@ -13,6 +14,7 @@ import utils.FormatterUtil;
  */
 
 public class Boleto {
+  private static final Date diaAtual = new Date();
   private Date vencimento;
   private Double valor;
   private Double desconto;
@@ -65,6 +67,10 @@ public class Boleto {
     return valor - desconto;
   }
 
+  public boolean isEquals(Object ob1, Object ob2) {
+    return Objects.equals(ob1, ob2);  
+  }
+
   @Override
   public String toString() {
     return ""
@@ -74,7 +80,7 @@ public class Boleto {
     + "\nVencimento: " + FormatterUtil.dataEmStr(vencimento)
     + "\nDesconto: " + desconto 
     + "\nValor Líquido: " + FormatterUtil.formatarEmReais(getValorLiquido())
-    + (vencimento.before(new Date()) && !vencimento.equals(new Date()) ? "\nBoleto vencido" : "") ;
+    + (vencimento.before(diaAtual) && !isEquals(vencimento, diaAtual) && !pago ? "\nBoleto vencido" : "") ;
   }
 
   public Boleto(Date vencimento, Double valor, Double desconto, String nomeCliente) {
