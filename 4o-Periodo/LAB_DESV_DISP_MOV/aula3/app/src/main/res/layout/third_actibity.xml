@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Primeira página"
+        android:text="Terceira página"
         tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="36dp" />
+        tools:layout_editor_absoluteY="36dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="184dp"
-        android:layout_height="69dp"
-        android:onClick="chamarSegundaPagina"
-        android:text="Página 3"
-        tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="390dp" />
-
-    <Button
-        android:id="@+id/button4"
+        android:id="@+id/button9"
         android:layout_width="184dp"
         android:layout_height="69dp"
         android:onClick="chamarSegundaPagina"
         android:text="Página 2"
         tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="299dp" />
+        tools:layout_editor_absoluteY="390dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button10"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="299dp"
+        android:layout_width="184dp"
+        android:layout_height="69dp"
+        android:text="Página 1"
+        tools:ignore="MissingConstraints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

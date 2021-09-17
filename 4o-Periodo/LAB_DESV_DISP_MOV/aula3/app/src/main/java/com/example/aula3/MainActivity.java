@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void chamarNovaPagina(View view) {
+    public void chamarSegundaPagina(View view) {
         Intent intencao = new Intent(this, SegundaAtividade.class);
         startActivity(intencao);
     }
