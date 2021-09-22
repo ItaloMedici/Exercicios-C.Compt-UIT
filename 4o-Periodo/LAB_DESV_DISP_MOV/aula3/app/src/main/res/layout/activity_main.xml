@@ -10,25 +10,35 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="244dp"
         android:text="Primeira página"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="36dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="184dp"
-        android:layout_height="69dp"
-        android:onClick="chamarSegundaPagina"
+        android:layout_height="0dp"
+        android:layout_marginBottom="272dp"
+        android:onClick="chamarTerceiraPagina"
         android:text="Página 3"
-        tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="390dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="184dp"
-        android:layout_height="69dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="22dp"
         android:onClick="chamarSegundaPagina"
         android:text="Página 2"
-        tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="299dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

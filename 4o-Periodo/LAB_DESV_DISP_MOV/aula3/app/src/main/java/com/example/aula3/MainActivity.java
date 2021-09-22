@@ -20,6 +20,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intencao);
     }
 
+    public void chamarTerceiraPagina(View view) {
+        Intent intent = new Intent(MainActivity.this, TerceiraAtividade.class);
+        startActivity(intent);
+    }
+
     public void fazerLigacao(View view) {
         Uri uri = Uri.parse("tel:37998726264");
         Intent ligacao = new Intent(Intent.ACTION_DIAL, uri);

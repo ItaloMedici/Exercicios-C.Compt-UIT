@@ -16,7 +16,12 @@ public class SegundaAtividade extends Activity {
     }
 
     public void chamarTerceiraPagina(View view) {
-        Intent intencao = new Intent((this. TerceiraAtividade.class));
+        Intent intent = new Intent(SegundaAtividade.this, TerceiraAtividade.class);
+        startActivity(intent);
     }
 
+    public void chamarPrimeiraPagina(View view) {
+        Intent intent = new Intent(SegundaAtividade.this, MainActivity.class);
+        startActivity(intent);
+    }
 }
