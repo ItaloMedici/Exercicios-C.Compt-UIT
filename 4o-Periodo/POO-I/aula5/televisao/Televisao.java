@@ -22,6 +22,8 @@ public class Televisao {
   private String marcaTv;
   private Boolean ligada;
 
+  private Integer Count = 5;
+
   public Double getVolumeAtual() {
     if (!ligada) {
       System.out.println("TV desligada");
@@ -88,6 +90,15 @@ public class Televisao {
     4 % 5 -> 4 + 1 = 5
     5 % 5 -> 0 + 1 = 1 
   */
+
+  /*
+    ((0 - 1) + 5) % 5 ->  -1 + 5 -> 4 % 5 = 4
+    ((1 - 1) + 5) % 5 ->  0 + 5 -> 5 % 5 = 0
+    ((2 - 1) + 5) % 5 ->  1 + 5 -> 6 % 5 = 0
+    ((3 - 1) + 5) % 5 ->  2 + 5 -> 3 % 5 = 0
+    ((4 - 1) + 5) % 5 ->  3 + 5 -> 2 % 5 = 0
+    ((5 - 1) + 5) % 5 ->  4 + 5 -> 1 % 5 = 0
+  */
   
   public void subirCanal() {
     if (!ligada) return;
@@ -98,7 +109,7 @@ public class Televisao {
   public void descerCanal() {
     if (!ligada) return;
 
-    canalAtual = (canalAtual % quantidadeCanais) - 1;    
+    canalAtual = ((canalAtual - 1) + quantidadeCanais) % quantidadeCanais; 
   }
 
   public void procurarCanal(Integer canalAtual) {
@@ -140,5 +151,5 @@ public class Televisao {
     setMarcaTv(marcaTv);
     setVolumeMaximo(100d);
     setQuantidadeCanais(10);
-  }
+  }    
 }
