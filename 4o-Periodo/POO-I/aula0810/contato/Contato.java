@@ -10,7 +10,7 @@ package aula0810.contato;
  */
 
 public class Contato {
-  private static long quantidade = 0;
+  private static long quantidade = 1;
   private long identificador;
   private String nome;
   private String telefone;
@@ -75,8 +75,7 @@ public class Contato {
 
   @Override
   public String toString() {
-    return "Contato [ativo=" + ativo + ", cidade=" + cidade + ", identificador=" + identificador + ", nome=" + nome
-        + ", telefone=" + telefone + "]";
+    return identificador + " - " + nome + ", Tel: " + telefone + ", " + cidade + " - " + (ativo ? "Ativo" : "Bloqueado");
   }
 
 }

@@ -6,9 +6,20 @@ import java.util.Scanner;
 public class Main {
   static Scanner s = new Scanner(System.in);
   static ArrayList<Contato> contatos = new ArrayList<>();
-  private static int length;
+
+  //Constants
+  static short ativo = 1;
+  static short inativo = 0;
 
   public static void main(String[] args) {
+    Contato c1 = new Contato("Italo", "12345678910", "Itauna");
+    Contato c2 = new Contato("Medici", "12345678910", "Itauna");
+    Contato c3 = new Contato("Silva", "12345678910", "Itauna");
+
+    contatos.add(c1);
+    contatos.add(c2);
+    contatos.add(c3);
+
     int option = 0;
     do {
       menu();
@@ -36,8 +47,6 @@ public class Main {
   }
 
   private static void handleOption(int option) {
-    final short ativo = 1;
-    final short inativo = 0;
 
     switch (option) {
       case 0: 
@@ -53,6 +62,9 @@ public class Main {
         break;
       case 4: 
         listarContatos(inativo);
+        break;
+      case 5:
+        ativarContato();
         break;
       case 6:
         bloquearContato();
@@ -74,8 +86,9 @@ public class Main {
   private static void createContato() {
     String nome, telefone, cidade = "";
 
-    System.out.print("\n\tAdicionando novo contato");
+    System.out.print("\n\tAdicionando novo contato\n");
     System.out.print("Nome: ");
+    clearBuffer();
     nome = s.nextLine();
 
     do {
@@ -86,7 +99,7 @@ public class Main {
     } while ( telefone.length() != 11 && telefone.length() != 10 );
 
     System.out.print("Cidade: ");
-    nome = s.nextLine();
+    cidade = s.nextLine();
 
     contatos.add(new Contato(nome, telefone, cidade));
   }
@@ -104,7 +117,7 @@ public class Main {
 
     Contato aux = searchContato(tipoPesquisa);
 
-    if (!aux.equals(null)) {
+    if (aux != null) {
       contatos.remove(aux);
     } else {
       System.out.println("Contato não encontrado!");
@@ -112,13 +125,37 @@ public class Main {
   }
 
   private static void listarContatos(short ativoInativo) {
+    System.out.println("\n\tAGENDA DE " + (ativoInativo == ativo ? "ATIVOS" : "BLOQUADOS"));
     for (Contato c : contatos) {
-      if (ativoInativo == 1 && c.isAtivo()) {
+      if (ativoInativo == ativo && c.isAtivo()) {
         System.out.println(c.toString());
-      } else if (ativoInativo == 0 && !c.isAtivo()){
+      } else if (ativoInativo == inativo && !c.isAtivo()){
         System.out.println(c.toString());
       }
     }
+  }
+
+  private static void ativarContato() {
+    int tipoPesquisa = 0;
+
+    System.out.println("\n\nAtivar por: "
+      + "\n1 - ID Contato"
+      + "\n2 - Nome"
+      + "\n3 - Telefone"
+      + "\nR.: "
+      );
+
+      tipoPesquisa = s.nextInt();
+
+      Contato aux = searchContato(tipoPesquisa);
+
+      if (aux != null && !aux.isAtivo()) {
+        int index = contatos.indexOf(aux);
+        contatos.get(index).desbloquear();
+        System.out.println(aux.getNome() + ", desbloquado!");
+      } else {
+        System.out.println("Contato não encontrado ou já ativo!");
+      }
   }
 
   private static void bloquearContato() {
@@ -135,7 +172,7 @@ public class Main {
 
       Contato aux = searchContato(tipoPesquisa);
 
-      if (!aux.equals(null)) {
+      if (aux != null) {
         int index = contatos.indexOf(aux);
         contatos.get(index).bloquear();
       } else {
@@ -151,6 +188,7 @@ public class Main {
 
   private static void listarPorCidade() {
     System.out.print("\nNome Cidade: ");
+    clearBuffer();
     String cidade = s.nextLine();
 
     for (Contato c : contatos) {
@@ -197,6 +235,7 @@ public class Main {
 
   private static Contato getContatoByname() {
     System.out.print("\nNome Contato: ");
+    clearBuffer();
     String nome = s.nextLine();
 
     for (Contato c : contatos) {
@@ -219,6 +258,12 @@ public class Main {
     }
 
     return null;
+  }
+
+  private static void clearBuffer() {
+    if (s.hasNextLine()) {
+        s.nextLine();
+    }
   }
 
 }
