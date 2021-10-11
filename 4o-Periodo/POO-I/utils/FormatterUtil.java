@@ -66,7 +66,7 @@ public class FormatterUtil {
 
     // Formatadores de String
     public static String formatarTelefone(String telefone) {
-        String tel2 = "";
+        String tel2 = telefone;
 
         if (telefone.length() == 11) {
             tel2 = "(" + telefone.substring(0, 2) + ") " 
