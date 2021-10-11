@@ -119,6 +119,7 @@ public class Main {
 
     if (aux != null) {
       contatos.remove(aux);
+      System.out.println(aux.getNome() + ", removido!");
     } else {
       System.out.println("Contato não encontrado!");
     }
@@ -175,6 +176,7 @@ public class Main {
       if (aux != null) {
         int index = contatos.indexOf(aux);
         contatos.get(index).bloquear();
+        System.out.println(aux.getNome() + ", bloquado!");
       } else {
         System.out.println("Contato não encontrado!");
       }
@@ -265,5 +267,5 @@ public class Main {
         s.nextLine();
     }
   }
-
+  
 }
