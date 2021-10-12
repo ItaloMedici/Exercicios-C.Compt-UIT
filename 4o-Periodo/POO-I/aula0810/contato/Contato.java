@@ -67,15 +67,26 @@ public class Contato {
 
   public void desbloquear() {
     ativo = true;
-  } 
+  }
 
   public boolean isAtivo() {
     return ativo;
   }
 
+  public String formatarTelefone() {
+    String telFormatted = telefone;
+
+    telFormatted = telefone.length() == 11
+        ? "(" + telefone.substring(0, 2) + ") " + telefone.substring(2, 7) + "-" + telefone.substring(7)
+        : "(" + telefone.substring(0, 2) + ") " + telefone.substring(2, 6) + "-" + telefone.substring(6);
+
+    return telFormatted;
+  }
+
   @Override
   public String toString() {
-    return identificador + " - " + nome + ", Tel: " + telefone + ", " + cidade + " - " + (ativo ? "Ativo" : "Bloqueado");
+    return identificador + " - " + nome + ", " + formatarTelefone() + ", " + cidade + " - "
+        + (ativo ? "Ativo" : "Bloqueado");
   }
 
 }

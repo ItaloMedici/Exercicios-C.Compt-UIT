@@ -153,6 +153,7 @@ public class Main {
       if (aux != null && !aux.isAtivo()) {
         int index = contatos.indexOf(aux);
         contatos.get(index).desbloquear();
+
         System.out.println(aux.getNome() + ", desbloquado!");
       } else {
         System.out.println("Contato não encontrado ou já ativo!");
@@ -176,6 +177,7 @@ public class Main {
       if (aux != null) {
         int index = contatos.indexOf(aux);
         contatos.get(index).bloquear();
+
         System.out.println(aux.getNome() + ", bloquado!");
       } else {
         System.out.println("Contato não encontrado!");
@@ -185,7 +187,12 @@ public class Main {
   private static void pesquisarPorNome() {
     int byName = 2;
     Contato aux = searchContato(byName);
-    System.out.println(aux.toString());
+
+    if (aux != null) {
+      System.out.println(aux.toString());
+    } else {
+      System.out.println("Contato não encontrado!");
+    }
   }
 
   private static void listarPorCidade() {
@@ -210,11 +217,9 @@ public class Main {
       case 1:
         contato = getContatoById();
         break;
-
       case 2: 
         contato = getContatoByname();
         break;
-      
       case 3: 
         contato = getContatoByTelefone();
         break;
@@ -251,6 +256,7 @@ public class Main {
 
   private static Contato getContatoByTelefone() {
     System.out.print("\nTelefone: ");
+    clearBuffer();
     String telefone = s.nextLine();
 
     for (Contato c : contatos) {
