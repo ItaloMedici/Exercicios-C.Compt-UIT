@@ -204,7 +204,7 @@ public class Main {
         default:
           break;
         }
-      
+      break;
       case 6:
         sala.esvaziarSala();
         break;
