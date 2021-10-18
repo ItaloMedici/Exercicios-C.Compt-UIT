@@ -24,10 +24,6 @@ public class Aluno {
     count++;
   }
 
-  public Aluno() {
-
-  }
-
   public Long getIdentificador() {
     return identificador;
   }
