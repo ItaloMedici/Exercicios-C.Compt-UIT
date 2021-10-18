@@ -36,19 +36,6 @@ public class Main {
     );
   }
 
-  public static void menuAlunos(String codSala ) {
-    System.out.print("\n\tSala " + codSala
-      + "\n1 - Adicionar Aluno"
-      + "\n2 - Remover Aluno"
-      + "\n3 - Listar Alunos"
-      + "\n4 - Exibir melhor aluno"
-      + "\n5 - Econtrar aluno na sala"
-      + "\n6 - Esvaziar sala"
-      + "\n0 - Sair"        
-      + "\nR: "
-    );
-  }
-
   private static void handleOptionSalas(int option, ArrayList<Sala> salas) {
     String codSala;
 
@@ -98,6 +85,19 @@ public class Main {
     }
   }
 
+  public static void menuAlunos(String codSala ) {
+    System.out.print("\n\tSala " + codSala
+      + "\n1 - Adicionar Aluno"
+      + "\n2 - Remover Aluno"
+      + "\n3 - Listar Alunos"
+      + "\n4 - Exibir melhor aluno"
+      + "\n5 - Econtrar aluno na sala"
+      + "\n6 - Esvaziar sala"
+      + "\n0 - Sair"        
+      + "\nR: "
+    );
+  }
+
   private static void handleOptionAlunos(int optionSala, Sala sala) {
     switch(optionSala) {
       case 1:
@@ -119,20 +119,97 @@ public class Main {
         Double notaSemestre = s.nextDouble();
 
         Aluno aluno = new Aluno(nome, EnumSexo, notaSemestre);
-        Aluno aluno1 = new Aluno("Italo", Sexo.FEMININO, 50d);
-
         sala.adicionarAluno(aluno);    
-        sala.adicionarAluno(aluno1);   
-        
+
         break;
       
       case 2:
+        System.out.print("\nRemover aluno por:\n1 - ID\n2 - Nome\n0 - Sair\nR: ");
+        short optionRemove = s.nextShort();
+
+        switch (optionRemove) {
+          case 1: 
+            System.out.print("ID do Aluno: ");
+            long idAluno = s.nextLong();
+
+            for (Aluno a : sala.getAlunos()) {
+              if (a.getIdentificador().equals(idAluno)) {
+                sala.removerAluno(a);
+                System.out.println(a.getNome() + ", removido da sala!");
+                break;
+              }
+            }
+            System.out.println("Aluno não encontrado na sala!");
+            break;
+
+          case 2:
+            System.out.print("Nome do Aluno: ");
+            clearBuffer();
+            String nomeAluno = s.nextLine();
+
+            for (Aluno a : sala.getAlunos()) {
+              if (a.getNome().equalsIgnoreCase(nomeAluno)) {
+                sala.removerAluno(a);
+                System.out.println(a.getNome() + ", removido da sala!");
+                break;
+              }
+            }
+            System.out.println(nomeAluno + ", não encontrado na sala!");
+            break;
+
+          default:
+            break;
+        }
         break;
 
       case 3:
         for (Aluno a : sala.getAlunos()) {
           System.out.println(a.toString());
         }
+        break;
+      
+      case 4:
+        Aluno melhorAluno = sala.getMelhorAluno();
+
+        if (melhorAluno != null) {
+          System.out.println("Melhor aluno\n" + melhorAluno.toString());
+          break;
+        }
+
+        System.out.println("Sala vazia");
+        break;
+
+      case 5:
+        System.out.print("\nEncontrar aluno por:\n1 - ID\n2 - Nome\n0 - Sair\nR: ");
+        short optionFind = s.nextShort();
+
+        switch(optionFind) {
+          case 1: 
+          System.out.print("ID do Aluno: ");
+          long idAluno = s.nextLong();
+
+          System.out.println(sala.encontrarAlunoPeloId(idAluno) ? "Aluno esta presente" : "Aluno não encontrado na sala!");
+
+          break;
+
+        case 2:
+          System.out.print("Nome do Aluno: ");
+          clearBuffer();
+          String nomeAluno = s.nextLine();
+
+          System.out.println(sala.encontrarAlunoPeloNome(nomeAluno) ? "Aluno esta presente" : "Aluno não encontrado na sala!");
+
+          break;
+
+        default:
+          break;
+        }
+      
+      case 6:
+        sala.esvaziarSala();
+        break;
+      
+      default:
         break;
     }
   }
@@ -148,7 +225,7 @@ public class Main {
 
   private static void clearBuffer() {
     if (s.hasNextLine()) {
-        s.nextLine();
+      s.nextLine();
     }
   }
 }
