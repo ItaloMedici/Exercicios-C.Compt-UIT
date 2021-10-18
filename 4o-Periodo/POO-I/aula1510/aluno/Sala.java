@@ -100,4 +100,12 @@ public class Sala {
 
     return alunosMsg;
   }
+
+  public String listarSala() {
+    return "\nCodigo Sala: " + codigoSala + ", quantidade de alunos: " + getQuantidadeAlunos();
+  }
+
+  public int getQuantidadeAlunos() {
+    return alunos.size();
+  }
 }

@@ -25,35 +25,6 @@ public class Main {
     s.close();
   }
 
-  private static void handleOptionSalas(int option, ArrayList<Sala> salas) {
-    String codSala;
-    switch(option) {
-      case 1:
-        System.out.print("Código da sala: ");
-        codSala = s.nextLine();
-        clearBuffer();
-
-        salas.add(new Sala(codSala));
-
-        System.out.println("Sala " + codSala + " adicionada!");
-        break;
-
-      case 2:
-        System.out.print("Código da sala a ser removida: ");
-        codSala = s.nextLine();
-
-        for (Sala s : salas) {
-          if (s.getCodigoSala().equalsIgnoreCase(codSala)) {
-            salas.remove(s);
-            break;
-          }
-        }
-
-      case 3:
-        
-    }
-  }
-
   public static void menuSalas() {
     System.out.print("\n\tESCOLA"
       + "\n1 - Adicionar Sala"
@@ -66,7 +37,7 @@ public class Main {
   }
 
   public static void menuAlunos(String codSala ) {
-    System.out.print("\n\tSala" + codSala
+    System.out.print("\n\tSala " + codSala
       + "\n1 - Adicionar Aluno"
       + "\n2 - Remover Aluno"
       + "\n3 - Listar Alunos"
@@ -76,6 +47,103 @@ public class Main {
       + "\n0 - Sair"        
       + "\nR: "
     );
+  }
+
+  private static void handleOptionSalas(int option, ArrayList<Sala> salas) {
+    String codSala;
+
+    switch(option) {
+      case 1:
+        System.out.print("Código da sala: ");
+        clearBuffer();
+        codSala = s.nextLine();
+
+        salas.add(new Sala(codSala));
+
+        System.out.println("Sala " + codSala + " adicionada!");
+        break;
+
+      case 2:
+        System.out.print("Código da sala a ser removida: ");
+        clearBuffer();
+        codSala = s.nextLine();
+
+        for (Sala s : salas) {
+          if (s.getCodigoSala().equalsIgnoreCase(codSala)) {
+            salas.remove(s);
+            break;
+          }
+        }
+
+        System.out.println("Sala não encontrada");
+        break;
+
+      case 3:
+        for (Sala s : salas) {
+          System.out.println(s.listarSala());
+        }
+        break;
+
+      case 4:
+        System.out.print("Código da sala que ira entrar: ");
+        clearBuffer();
+        codSala = s.nextLine();
+
+        int optionSala = 0;
+        do {
+          menuAlunos(codSala);
+          optionSala = s.nextInt();
+          handleOptionAlunos(optionSala, findSala(salas, codSala));
+        } while (optionSala != 0);
+    }
+  }
+
+  private static void handleOptionAlunos(int optionSala, Sala sala) {
+    switch(optionSala) {
+      case 1:
+        System.out.print("Nome do Aluno: ");
+        clearBuffer();
+        String nome = s.nextLine();
+
+        short sexo;
+        do {
+          System.out.print("Sexo do Aluno [ " 
+            + Sexo.FEMININO.getValue() + " - " + Sexo.FEMININO.getDescricao() + "/ "
+            + Sexo.MASCULINO.getValue() + " - " + Sexo.MASCULINO.getDescricao() + "]");
+          sexo = s.nextShort();
+        } while (sexo < 0 || sexo > 1);
+
+        Sexo EnumSexo = sexo == Sexo.FEMININO.getValue() ? Sexo.FEMININO : Sexo.MASCULINO;
+
+        System.out.print("Nota do semestre: ");
+        Double notaSemestre = s.nextDouble();
+
+        Aluno aluno = new Aluno(nome, EnumSexo, notaSemestre);
+        Aluno aluno1 = new Aluno("Italo", Sexo.FEMININO, 50d);
+
+        sala.adicionarAluno(aluno);    
+        sala.adicionarAluno(aluno1);   
+        
+        break;
+      
+      case 2:
+        break;
+
+      case 3:
+        for (Aluno a : sala.getAlunos()) {
+          System.out.println(a.toString());
+        }
+        break;
+    }
+  }
+
+  private static Sala findSala(ArrayList<Sala> salas, String codigo) {
+    for (Sala s : salas) {
+      if (s.getCodigoSala().equalsIgnoreCase(codigo)) {
+        return s;
+      }
+    }
+    return null;
   }
 
   private static void clearBuffer() {
