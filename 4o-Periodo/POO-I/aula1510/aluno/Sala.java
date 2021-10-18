@@ -58,9 +58,18 @@ public class Sala {
     this.alunos.remove(aluno);
   }
 
-  public boolean alunoEstaNaSala(Aluno aluno) {
+  public boolean encontrarAlunoPeloId(Long id) {
     for (Aluno a : alunos) {
-      if (a.equals(aluno)) {
+      if (a.getIdentificador().equals(id)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean encontrarAlunoPeloNome(String nome) {
+    for (Aluno a : alunos) {
+      if (a.getNome().equalsIgnoreCase(nome)) {
         return true;
       }
     }
@@ -72,7 +81,7 @@ public class Sala {
   }
 
   public Aluno getMelhorAluno() {
-    if (alunos.isEmpty()) return new Aluno();
+    if (alunos.isEmpty()) return null;
 
     Aluno melhorAluno = alunos.get(0);
     Double maiorNota = melhorAluno.getNotaSemestre();
