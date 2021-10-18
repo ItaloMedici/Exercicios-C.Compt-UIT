@@ -1,7 +1,7 @@
 package aula1510.aluno;
 
 public enum Sexo {
-  FEMININO((short) 0, "Feminino"), MASCULINO((short) 1, "Feminino");
+  FEMININO((short) 0, "Feminino"), MASCULINO((short) 1, "Masculino");
 
   private short sexo;
   private String descricao;
