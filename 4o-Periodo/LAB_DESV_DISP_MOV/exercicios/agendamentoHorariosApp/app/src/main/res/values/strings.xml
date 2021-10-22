@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Agendamento Horarios</string>
+    <string name="loremIpsumLogin">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="LoremIpumAuthorLogin">- Enim risus</string>
+    <string name="entrar">Entrar</string>
+    <string name="entrarTitle">Entrar</string>
+    <string name="senhaButton">Senha</string>
+    <string name="usuarioInput">Usuário</string>
+</resources>

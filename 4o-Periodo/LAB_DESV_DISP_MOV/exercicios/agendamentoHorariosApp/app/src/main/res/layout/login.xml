@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_login"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="263dp"
+        android:layout_height="310dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="200dp"
+        android:background="@drawable/logo1_outlined"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="50dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/logo1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="293dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="140dp"
+        android:fontFamily="@font/robotoMedium"
+        android:text="@string/loremIpsumLogin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/grey_5"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/robotoLight"
+        android:text="@string/LoremIpumAuthorLogin"
+        android:textColor="@color/grey_5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <View
+        android:id="@+id/containerInputs"
+        style="@style/ContainerInputsLogin"
+        android:layout_width="wrap_content"
+        android:alpha=".6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_usuario"
+        style="@style/EditTextInput"
+        android:layout_marginTop="81dp"
+        android:hint="@string/usuarioInput"
+        app:layout_constraintEnd_toEndOf="@+id/containerInputs"
+        app:layout_constraintStart_toStartOf="@+id/containerInputs"
+        app:layout_constraintTop_toTopOf="@+id/containerInputs" />
+
+    <EditText
+        android:id="@+id/edit_senha"
+        style="@style/EditTextInput"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="@string/senhaButton"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/containerInputs"
+        app:layout_constraintStart_toStartOf="@+id/containerInputs"
+        app:layout_constraintTop_toBottomOf="@+id/edit_usuario" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/robotoMedium"
+        android:text="@string/entrarTitle"
+        android:textColor="@color/nude_3"
+        android:textSize="24sp"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/containerInputs" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/ButtonEntrar"
+        app:backgroundTint="@color/nude_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_senha"
+        android:text="@string/entrar"
+        app:icon="@drawable/ic_login"
+        app:iconGravity="textEnd"
+        app:iconPadding="10dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
