@@ -13,25 +13,12 @@ import java.util.ArrayList;
  */
 
 public class Sala {
-  private Long identificador;
   private String codigoSala;
   private ArrayList<Aluno> alunos;
 
-  private static long count = 1;
-
   public Sala(String codigoSala) {
-    setIdentificador(count);
     this.alunos = new ArrayList<>();
     this.codigoSala = codigoSala;
-    count++;
-  }
-
-  public Long getIdentificador() {
-    return identificador;
-  }
-
-  private void setIdentificador(Long identificador) {
-    this.identificador = identificador;
   }
 
   public String getCodigoSala() {
