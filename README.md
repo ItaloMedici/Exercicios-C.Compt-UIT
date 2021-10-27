@@ -19,4 +19,6 @@ Nessa pagina é possivel encontar os exercícios propostos no decorrer do curso 
 
 - [POO I](https://github.com/ItaloMedici/Exericios-C.Compt-UIT/tree/main/4o-Periodo/POO-I)
 - [LAB. DESENVOLVIMENTO DISPOSITIVOS MOBILE](https://github.com/ItaloMedici/Exericios-C.Compt-UIT/tree/main/4o-Periodo/LAB_DESV_DISP_MOV)
-- [BANCO DE DADOS I](https://github.com/ItaloMedici/Exercicios-C.Compt-UIT/tree/main/4o-Periodo/BANCO_DADOS_I) 
+- [BANCO DE DADOS I](https://github.com/ItaloMedici/Exercicios-C.Compt-UIT/tree/main/4o-Periodo/BANCO_DADOS_I)
+- [ENGENHARIA DE SOFTWARE I](https://github.com/ItaloMedici/Exercicios-C.Compt-UIT/tree/main/4o-Periodo/ENG_SOFTWARE_I)
+ 
