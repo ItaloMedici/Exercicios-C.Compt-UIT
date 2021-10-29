@@ -4,11 +4,11 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="300"
-        android:font="@font/robotoLight"/>
+        android:font="@font/roboto_light"/>
 
     <font
         android:fontStyle="normal"
         android:fontWeight="500"
-        android:font="@font/robotoMedium"/>
+        android:font="@font/roboto_medium"/>
 
 </font-family>
