@@ -17,9 +17,14 @@ public class Main {
     for (int i = 0; i < arrayInteiros.length; i++) {
       arrayInteiros[i] = getRandomNumber();
     }
-
+    
+    for (int num : arrayInteiros) {
+      System.out.print(num + ", ");
+    }
+    System.out.println("\n");
+    
     arrayInteiros = sortArray(arrayInteiros);
-
+    
     for (int num : arrayInteiros) {
       System.out.print(num + ", ");
     }
