@@ -9,6 +9,10 @@ package aula0510;
  * cada um dos atributos.  Sobreescreve o metodo toString(), que, quando
  * chamado, imprime na tela uma espécie de relatório informando os dados do
  * animal.
+ * 
+ * Crie na classe animal o método emitirSom() que retorna uma string com o som
+ * do animal. Este método deve ser sobreescrito em cada animal que herda desta
+ * classe.
  */
 
 public class Animal {
@@ -76,10 +80,14 @@ public class Animal {
     this.velocidadeMedia = velocidadeMedia;
   }
 
+  public String emitirSom() {
+    return "";
+  }
+
   @Override
   public String toString() {
     return "Animal [ambiente=" + ambiente + ", comprimento=" + comprimento + ", cor=" + cor + ", nome=" + nome
         + ", numeroPatas=" + numeroPatas + ", velocidadeMedia=" + velocidadeMedia + "]";
   }
-  
-} 
+
+}

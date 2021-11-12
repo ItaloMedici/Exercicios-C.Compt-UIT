@@ -29,9 +29,14 @@ public class Mamifero extends Animal {
     this.alimento = alimento;
   }
 
+  @Override
+  public String emitirSom() {
+    return "som_de_mamifero.mp3";
+  } 
+
   public String dadosMamifero() {
-    return ("Pexei: "
-      + "\nCaracteristica: " + alimento
+    return ("\tMamifero "
+      + "\nAlimento: " + alimento
       + "\nNome: " + getNome()
       + "\nComprimento: " + getComprimento()
       + "\nNumero Patas: " + getNumeroPatas()

@@ -28,9 +28,14 @@ public class Peixe extends Animal {
   public void setCaracteristica(String caracteristica) {
     this.caracteristica = caracteristica;
   }
+  
+  @Override
+  public String emitirSom() {
+    return "blublbubu";
+  } 
 
   public String dadosPeixe() {
-    return ("Pexei: "
+    return ("\tPeixe "
       + "\nCaracteristica: " + caracteristica
       + "\nNome: " + getNome()
       + "\nComprimento: " + getComprimento()
