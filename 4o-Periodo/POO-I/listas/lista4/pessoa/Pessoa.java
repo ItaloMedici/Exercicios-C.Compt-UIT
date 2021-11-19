@@ -1,4 +1,4 @@
-package listas.lista4;
+package listas.lista4.pessoa;
 
 /**
  * Cria uma Classe Pessoa, contendo os atributos encapsulados, com seus
@@ -53,6 +53,11 @@ public class Pessoa {
 
   public void setTelefone(String telefone) {
     this.telefone = telefone;
+  }
+
+  @Override
+  public String toString() {
+    return nome + ", Endereço: " + endereço + ", Telefone: " + telefone ;
   }
 
 }

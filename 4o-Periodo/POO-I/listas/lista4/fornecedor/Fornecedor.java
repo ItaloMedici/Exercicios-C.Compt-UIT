@@ -1,4 +1,6 @@
-package listas.lista4;
+package listas.lista4.fornecedor;
+
+import listas.lista4.pessoa.Pessoa;
 
 /**
  * Considere, como subclasse da classe Pessoa (desenvolvida no exercício
@@ -14,35 +16,48 @@ package listas.lista4;
  * classe Pessoa. Os métodos get e set são adequados? O valor da Dívida deve ser
  * alterado ou incrementado? Pense nestas situações neste e nos demais
  * exercícios.
+ * 
+ * @author Italo
  */
 
 public class Fornecedor extends Pessoa {
-  private Double limiteCreditor;
+  private Double limiteCredito;
   private Double valorDivida;
 
-  public Fornecedor(String nome, Double limiteCreditor) {
+  public Fornecedor(String nome, Double limiteCredito) {
     super(nome);
-    this.limiteCreditor = limiteCreditor;
+    setLimiteCredito(limiteCredito);
     this.valorDivida = 0d;
   }
-  public Fornecedor(String nome, String endereço, String telefone, Double limiteCreditor) {
+
+  public Fornecedor(String nome, String endereço, String telefone, Double limiteCredito) {
     super(nome, endereço, telefone);
-    this.limiteCreditor = limiteCreditor;
+    this.limiteCredito = limiteCredito;
     this.valorDivida = 0d;
   }
-  public Double getLimiteCreditor() {
-    return limiteCreditor;
+
+  public Double getLimiteCredito() {
+    return limiteCredito;
   }
-  public void setLimiteCreditor(Double limiteCreditor) {
-    if (limiteCreditor > 0) {
-      this.limiteCreditor = limiteCreditor;
+
+  public void setLimiteCredito(Double limiteCredito) {
+    if (limiteCredito > 0) {
+      this.limiteCredito = limiteCredito;
     }
   }
+
   public Double getValorDivida() {
     return valorDivida;
   }
+
   public void setValorDivida(Double valorDivida) {
+    if (this.valorDivida + valorDivida > limiteCredito) return;
+  
     this.valorDivida += valorDivida;
+  }
+
+  public Double obterSaldoRestante() {
+    return limiteCredito - valorDivida;
   }
 
 }
