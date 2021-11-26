@@ -23,25 +23,17 @@ import java.time.LocalDate;
  * salário de cada um deles.
  */
 
-public class Professor {
+public abstract class Professor {
   private String matricula;
   private String nome;
-  private Short sexo;
+  private Sexo sexo;
   private LocalDate dataNascimento;
   private LocalDate dataContrato;
 
-  private final short MASCULINO = 0;
-  private final short FEMININO = 1;
-
-  public Professor() {
-    this.sexo = MASCULINO;
-  }
-
-  public Professor(String matricula, String nome, Short sexo, LocalDate dataNascimento, LocalDate dataContrato) {
-    this();
+  public Professor(String matricula, String nome, Sexo sexo, LocalDate dataNascimento, LocalDate dataContrato) {
     this.matricula = matricula;
     this.nome = nome;
-    setSexo(sexo);
+    this.sexo = sexo;
     this.dataNascimento = dataNascimento;
     this.dataContrato = dataContrato;
   }
@@ -62,14 +54,12 @@ public class Professor {
     this.nome = nome;
   }
 
-  public Short getSexo() {
+  public Sexo getSexo() {
     return sexo;
   }
 
-  public void setSexo(Short sexo) {
-    if (sexo <= 1 && sexo >= 0) {
-      this.sexo = sexo;
-    }
+  public void setSexo(Sexo sexo) {
+    this.sexo = sexo;
   }
 
   public LocalDate getDataNascimento() {
@@ -97,9 +87,19 @@ public class Professor {
   }
 
   public int getQuantiadesAnosParaAposentar() {
-    int quantidade = ((65 - getIdade()) + getAnosDeTrabalho());
+    int quantidade;
+    int calcAnosTrabalho = 35 - getAnosDeTrabalho();
+    int calcIdade = 65 - getIdade();
 
-    return quantidade < 0 ? 0 : quantidade;
+    quantidade = calcIdade > calcAnosTrabalho ? calcIdade : calcAnosTrabalho;
+
+    if (Sexo.FEMININO.equals(this.sexo)) {
+      quantidade -= 5;
+    }
+
+    return quantidade;
   }
+
+  public abstract int getSalario();
 
 }
