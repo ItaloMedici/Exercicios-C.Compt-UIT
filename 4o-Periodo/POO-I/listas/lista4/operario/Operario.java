@@ -26,7 +26,7 @@ public class Operario extends Empregado {
     super(nome, codigoSetor, salarioBase, porcentagemImposto);
     this.valorProducao = valorProducao;
     setComissao();
-    this.setSalarioBase(salarioBase);
+    super.setSalarioBase(salarioBase);
   }
 
   public Operario(String nome, String endereço, String telefone, int codigoSetor, Double salarioBase,
@@ -34,7 +34,7 @@ public class Operario extends Empregado {
     super(nome, endereço, telefone, codigoSetor, salarioBase, porcentagemImposto);
     this.valorProducao = valorProducao;
     setComissao();
-    this.setSalarioBase(salarioBase + this.comissao);
+    super.setSalarioBase(salarioBase + this.comissao);
     
   }
 
@@ -54,5 +54,9 @@ public class Operario extends Empregado {
     this.comissao = valorProducao / 100;
   }
 
+  @Override
+  public Double calcularSalario() {
+    return super.calcularSalario() * (1 + comissao); 
+  }
 
 }

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SharedPreference</string>
+    <string name="usuario">Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="login">Login</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="cor1">Cor 1</string>
+    <string name="cor2">Cor 2</string>
+</resources>
