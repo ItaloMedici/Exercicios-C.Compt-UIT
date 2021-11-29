@@ -5,5 +5,5 @@
     <string name="entrar">Entrar</string>
     <string name="entrarTitle">Entrar</string>
     <string name="senhaButton">Senha</string>
-    <string name="usuarioInput">Usuário</string>
+    <string name="emailInput">Email</string>
 </resources>
