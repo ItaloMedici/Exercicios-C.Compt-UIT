@@ -15,15 +15,6 @@ public class Atendimento {
 
     public Atendimento() {}
 
-    public Atendimento(Long identificador, String descricao, Double valor, Date horario, String observacao, String nomeCliente) {
-        this.identificador = identificador;
-        this.descricao = descricao;
-        this.valor = valor;
-        this.horario = horario;
-        this.observacao = observacao;
-        this.nomeCliente = nomeCliente;
-    }
-
     public Atendimento(Long identificador, String descricao, Double valor, Date horario, String observacao, String nomeCliente, Usuario usuario) {
         this.identificador = identificador;
         this.descricao = descricao;
@@ -32,6 +23,14 @@ public class Atendimento {
         this.observacao = observacao;
         this.nomeCliente = nomeCliente;
         this.usuario = usuario;
+    }
+
+    public Atendimento(Long identificador, String descricao, Double valor, Date horario, String observacao, String nomeCliente) {
+        this(identificador, descricao, valor, horario, observacao, nomeCliente, null);
+    }
+
+    public Atendimento(String descricao, Double valor, Date horario, String observacao, String nomeCliente, Usuario usuario) {
+        this(null, descricao, valor, horario, observacao, nomeCliente, usuario);
     }
 
     public Long getIdentificador() {

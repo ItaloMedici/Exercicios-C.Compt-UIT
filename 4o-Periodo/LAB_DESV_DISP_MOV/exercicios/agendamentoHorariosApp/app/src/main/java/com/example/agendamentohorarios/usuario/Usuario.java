@@ -8,6 +8,13 @@ public class Usuario {
 
     public Usuario(){};
 
+    public Usuario(Long identificador, String nome, String email, String senha) {
+        this.identificador = identificador;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
+
     public Usuario(Long identificador, String nome, String email) {
         this.identificador = identificador;
         this.nome = nome;
@@ -15,6 +22,7 @@ public class Usuario {
     }
 
     public Usuario(String nome, String email, String senha) {
+        this.identificador = identificador;
         this.nome = nome;
         this.email = email;
         this.senha = senha;

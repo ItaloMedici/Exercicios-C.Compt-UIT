@@ -14,11 +14,17 @@ import java.util.List;
 public class DAOUsuario extends DBUtils {
 
     private static final String table = "usuario";
-    private static final String[] colunas = {"_id_usuario", "nome", "email"};
+    private static final String[] colunas = {"_id_usuario", "nome", "email",  "senha"};
+    private static final int ID_USUARIO = 0;
+    private static final int NOME = 1;
+    private static final int EMAIL = 2;
+    private static final int SENHA = 3;
 
+    private SQLiteDatabase database;
 
     public DAOUsuario(Context context) {
         super(context);
+        database = dbCore.getWritableDatabase();
     }
 
     @Override
@@ -54,9 +60,9 @@ public class DAOUsuario extends DBUtils {
         );
 
         while (c.moveToNext()) {
-            Long id = c.getLong(c.getColumnIndexOrThrow(colunas[0]));
-            String nome = c.getString(c.getColumnIndexOrThrow(colunas[1]));
-            String email = c.getString(c.getColumnIndexOrThrow(colunas[2]));
+            Long id = c.getLong(c.getColumnIndexOrThrow(colunas[ID_USUARIO]));
+            String nome = c.getString(c.getColumnIndexOrThrow(colunas[NOME]));
+            String email = c.getString(c.getColumnIndexOrThrow(colunas[EMAIL]));
 
             Usuario u = new Usuario(id, nome, email);
         }
@@ -64,7 +70,7 @@ public class DAOUsuario extends DBUtils {
         return usuarios;
     }
 
-    public boolean authLogin(Usuario u) {
+    public Long authLogin(Usuario u) {
         String whereClause = "email = ? AND senha = ?";
         String[] whereArgs = new String[] {
                 u.getEmail(),
@@ -77,26 +83,22 @@ public class DAOUsuario extends DBUtils {
                 null, null, "nome"
         );
 
-//        if (c.getCount() > 0) {
-//            return true;
-//
-//            do {
-//                int id = c.getColumnIndex(colunas[0]);
-//                int nome = c.getColumnIndex(colunas[1]);
-//                int email = c.getColumnIndex(colunas[2]);
-//
-//                Usuario uAux = new Usuario(c.getLong(id), c.getString(nome), c.getString(email));
-//
-//                if (uAux.getEmail().equals(u.getEmail()) && uAux.getSenha().equals(u.getSenha())) {
-//                    return true;
-//                }
-//
-//            } while (c.moveToNext());
-//        }
-//
-//        return false;
+        while (c.moveToNext()) {
+            Long id = c.getLong(c.getColumnIndexOrThrow(colunas[ID_USUARIO]));
+            String nome = c.getString(c.getColumnIndexOrThrow(colunas[NOME]));
+            String email = c.getString(c.getColumnIndexOrThrow(colunas[EMAIL]));
+            String senha = c.getString(c.getColumnIndexOrThrow(colunas[SENHA]));
 
-        return c.getCount() > 0;
+            Usuario uAux = new Usuario(id, nome, email, senha);
+
+            if (uAux.getEmail().equals(u.getEmail()) && uAux.getSenha().equals(u.getSenha())) {
+                return id;
+            }
+        }
+
+        return null;
+
+        //return c.getCount() > 0;
     }
 
     public Long getIDByEmail(String email) {

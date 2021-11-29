@@ -19,33 +19,34 @@ public class DBCore extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("" +
+        String createUsuario = "" +
                 "CREATE TABLE usuario (" +
                 "   _id_usuario INTEGER primary key autoincrement," +
                 "   nome TEXT NOT NULL," +
                 "   senha TEXT NOT NULL," +
                 "   email TEXT NOT NULL UNIQUE" +
-                ");"
-        );
+                "); " ;
 
-        sqLiteDatabase.execSQL("" +
-                "CREATE TABLE atendimeto (" +
-                "   _id_atendimento INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "   descricao TEXT NOT NULL," +
-                "   nome_cliente TEXT NOT NULL," +
-                "   observacao TEXT," +
-                "   horario TEXT NOT NULL," +
-                "   valor DOUBLE NOT NULL," +
-                "   _id_usuario INT NOT NULL, " +
-                "   FOREIGN KEY (_id_usuario) REFERENCES usuario(_id_usuario)" +
-                ");"
-        );
+        String createAtendimento = "" +
+            "CREATE TABLE atendimento (" +
+            "   _id_atendimento INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "   descricao TEXT NOT NULL," +
+            "   nome_cliente TEXT NOT NULL," +
+            "   observacao TEXT," +
+            "   horario TEXT NOT NULL," +
+            "   valor DOUBLE NOT NULL," +
+            "   _id_usuario INTEGER NOT NULL, " +
+            "   FOREIGN KEY (_id_usuario) REFERENCES usuario(_id_usuario)" +
+            ");";
+
+        sqLiteDatabase.execSQL(createUsuario);
+        sqLiteDatabase.execSQL(createAtendimento);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("drop table usuario");
-        sqLiteDatabase.execSQL("drop table atendimeto");
+        sqLiteDatabase.execSQL("drop table atendimento");
         onCreate(sqLiteDatabase);
     }
 }

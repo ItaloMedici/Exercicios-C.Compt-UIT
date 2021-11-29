@@ -16,13 +16,14 @@ import com.example.agendamentohorarios.usuario.DAOUsuario;
 import com.example.agendamentohorarios.usuario.Usuario;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
     private ImageButton btnLogOut;
     private ImageButton btnCadastrarAtendimento;
-    private Usuario usuario;
+    private static Usuario usuario = new Usuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +32,20 @@ public class HomeActivity extends AppCompatActivity {
         initComponents();
         getSupportActionBar().hide();
 
-        Intent intent = new Intent();
-        String id = intent.getStringExtra("id");
+        Intent intent = getIntent();
+        if (intent != null) {
+            Bundle extras = intent.getExtras();
 
-        DAOUsuario daoUsuario = new DAOUsuario(this);
+            if (extras != null) {
+                usuario.setIdentificador(extras.getLong("idUsuario"));
+                usuario.setNome(extras.getString("email"));
+                usuario.setEmail(extras.getString("senha"));
+            }
+        }
+
         DAOAtendimento daoAtendimento = new DAOAtendimento(this);
+        inserirAtendimentosTeste(daoAtendimento);
 
-        usuario = daoUsuario.getUsuarioByID(Long.valueOf(id));
         List<Atendimento> atendimentos = daoAtendimento.searchByIdUsuario(usuario);
 
         AtendimentoAdapter adapter = new AtendimentoAdapter(getApplicationContext(), R.id.card_list, atendimentos);
@@ -60,5 +68,13 @@ public class HomeActivity extends AppCompatActivity {
     public void cadastrarAtendimento(View view) {
         Intent cadastroIntent =  new Intent(HomeActivity.this, CadastroAtendimentoAcitivity.class);
         startActivity(cadastroIntent);
+    }
+
+    private void inserirAtendimentosTeste(DAOAtendimento db) {
+        Atendimento atd = new Atendimento("Limpeza", 120d, new Date(), "Obs", "Italo", usuario);
+        Atendimento atd2 = new Atendimento("Pele", 140d, new Date(), "Obs", "Italo", usuario);
+
+        db.insert(atd);
+        db.insert(atd2);
     }
 }

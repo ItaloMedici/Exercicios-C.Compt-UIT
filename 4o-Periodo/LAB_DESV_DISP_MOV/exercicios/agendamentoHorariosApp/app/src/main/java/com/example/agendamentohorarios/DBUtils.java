@@ -9,11 +9,10 @@ import java.util.List;
 
 public abstract class DBUtils {
 
-    protected SQLiteDatabase database;
+    protected DBCore dbCore;
 
     public DBUtils(Context context) {
-        DBCore dbCore = new DBCore(context);
-        database = dbCore.getWritableDatabase();
+        dbCore = new DBCore(context);
     }
 
     public abstract void insert(Object o);

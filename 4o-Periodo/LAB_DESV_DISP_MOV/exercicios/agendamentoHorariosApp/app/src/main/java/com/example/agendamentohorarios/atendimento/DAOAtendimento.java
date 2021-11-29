@@ -3,6 +3,7 @@ package com.example.agendamentohorarios.atendimento;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.example.agendamentohorarios.DBUtils;
 import com.example.agendamentohorarios.usuario.Usuario;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class DAOAtendimento extends DBUtils {
 
+    private SQLiteDatabase database;
     private static final String table = "atendimento";
     private static final String[] colunas = {
             "_id_atendimento",
@@ -26,8 +28,17 @@ public class DAOAtendimento extends DBUtils {
             "_id_usuario"
     };
 
+    private static final int ID_ATDIMENTO = 0;
+    private static final int DESCRICAO = 1;
+    private static final int VALOR = 2;
+    private static final int HORARIO = 3;
+    private static final int OBSERVACAO = 4;
+    private static final int NOME_CLIENTE = 5;
+    private static final int ID_USUARIO = 6;
+
     public DAOAtendimento(Context context) {
         super(context);
+        database = dbCore.getWritableDatabase();
     }
 
     @Override
@@ -35,12 +46,12 @@ public class DAOAtendimento extends DBUtils {
         Atendimento atd = (Atendimento) o;
 
         ContentValues values = new ContentValues();
-        values.put(colunas[1], atd.getDescricao());
-        values.put(colunas[2], atd.getValor());
-        values.put(colunas[3], new SimpleDateFormat("dd/MM/yyyy HH:MM").format(atd.getHorario()));
-        values.put(colunas[4], atd.getObservacao());
-        values.put(colunas[5], atd.getUsuario().getIdentificador());
-
+        values.put(colunas[DESCRICAO], atd.getDescricao());
+        values.put(colunas[NOME_CLIENTE], atd.getNomeCliente());
+        values.put(colunas[VALOR], atd.getValor());
+        values.put(colunas[HORARIO], new SimpleDateFormat("dd/MM/yyyy HH:MM").format(atd.getHorario()));
+        values.put(colunas[OBSERVACAO], atd.getObservacao());
+        values.put(colunas[ID_USUARIO], atd.getUsuario().getIdentificador());
 
         database.insert(table, null, values);
     }
@@ -63,24 +74,24 @@ public class DAOAtendimento extends DBUtils {
     public List<Atendimento> searchByIdUsuario(Usuario u) {
         List<Atendimento> atendimentos = new ArrayList<>();
 
-        String whereClause = colunas[7] + " = ? ";
+        String whereClause = colunas[ID_USUARIO] + " = ? ";
         String[] whereArgs = new String[] {
-                u.getEmail()
+                u.getIdentificador().toString()
         };
 
         Cursor c = database.query(
                 table, colunas,
                 whereClause, whereArgs,
-                null, null, colunas[3] + "DESC"
+                null, null, colunas[HORARIO] + " DESC"
         );
 
         while (c.moveToNext()) {
-            Long id = c.getLong(c.getColumnIndexOrThrow(colunas[0]));
-            String descricao = c.getString(c.getColumnIndexOrThrow(colunas[1]));
-            Double valor = c.getDouble(c.getColumnIndexOrThrow(colunas[2]));
-            String horarioStr = c.getString(c.getColumnIndexOrThrow(colunas[3]));
-            String observacao = c.getString(c.getColumnIndexOrThrow(colunas[4]));
-            String nome_cliente = c.getString(c.getColumnIndexOrThrow(colunas[5]));
+            Long id = c.getLong(c.getColumnIndexOrThrow(colunas[ID_ATDIMENTO]));
+            String descricao = c.getString(c.getColumnIndexOrThrow(colunas[DESCRICAO]));
+            Double valor = c.getDouble(c.getColumnIndexOrThrow(colunas[VALOR]));
+            String horarioStr = c.getString(c.getColumnIndexOrThrow(colunas[HORARIO]));
+            String observacao = c.getString(c.getColumnIndexOrThrow(colunas[OBSERVACAO]));
+            String nome_cliente = c.getString(c.getColumnIndexOrThrow(colunas[NOME_CLIENTE]));
 
             Date horario = new Date();
             try {

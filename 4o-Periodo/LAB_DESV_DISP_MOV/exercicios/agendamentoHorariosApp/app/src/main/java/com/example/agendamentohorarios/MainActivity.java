@@ -62,18 +62,14 @@ public class MainActivity extends AppCompatActivity {
         } else {
             usuario.setEmail(email);
             usuario.setSenha(senha);
+            Long id = db.authLogin(usuario);
 
-            if(db.authLogin(usuario)) {
-                Long id = db.getIDByEmail(email);
-                if (id != null) {
-                    homeIntent.putExtra("idUsuario", id);
-                    startActivity(homeIntent);
-                } else {
-                    Snackbar snackbar = Snackbar.make(view, erros[2], Snackbar.LENGTH_SHORT);
-                    snackbar.setBackgroundTint(Color.WHITE);
-                    snackbar.setTextColor(Color.BLACK);
-                    snackbar.show();
-                }
+            if(id != null) {
+                homeIntent.putExtra("idUsuario", id);
+                homeIntent.putExtra("email", email);
+                homeIntent.putExtra("senha", senha);
+
+                startActivity(homeIntent);
             } else {
                 Snackbar snackbar = Snackbar.make(view, erros[1], Snackbar.LENGTH_SHORT);
                 snackbar.setBackgroundTint(Color.WHITE);
@@ -84,6 +80,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void inserirUsuarioTeste(DAOUsuario db) {
-        db.insert(new Usuario("Italo", "admin", "123"));
+        db.insert(new Usuario("Italo", "a", "a"));
     }
 }
