@@ -1,9 +1,12 @@
 package com.example.agendamentohorarios;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toolbar;
 
@@ -18,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class CadastroAtendimentoAcitivity extends AppCompatActivity {
@@ -28,6 +32,9 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
     private EditText etValor;
     private EditText etObservacao;
     private EditText etAgendamento;
+    private EditText etHorario;
+
+    private DatePickerDialog datePickerDialog;
 
     private static Usuario usuario = new Usuario();
 
@@ -43,6 +50,7 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
         setContentView(R.layout.cadastro_atendimento);
         getSupportActionBar().hide();
         initCompoenents();
+        initDatePicker();
 
         btnSave.setOnClickListener(view -> salvar(view));
     }
@@ -54,6 +62,9 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
         etValor = (EditText) findViewById(R.id.valorServico);
         etObservacao = (EditText) findViewById(R.id.obervacao);
         etAgendamento = (EditText) findViewById(R.id.diaText);
+        etHorario = (EditText) findViewById(R.id.horaText);
+
+        etAgendamento.setText(getTodayDate());
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -66,6 +77,46 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
         }
     }
 
+    private String getTodayDate() {
+        Calendar calendar = Calendar.getInstance();
+        int ano = calendar.get(Calendar.YEAR);
+        int mes = calendar.get(Calendar.MONTH);
+        int dia = calendar.get(Calendar.DAY_OF_MONTH);
+
+        return makeDateString(ano, mes + 1, dia);
+    }
+
+
+    private void initDatePicker() {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                String date = makeDateString(year, month + 1, dayOfMonth);
+                etAgendamento.setText(date);
+            }
+        };
+
+        Calendar calendar = Calendar.getInstance();
+        int ano = calendar.get(Calendar.YEAR);
+        int mes = calendar.get(Calendar.MONTH);
+        int dia = calendar.get(Calendar.DAY_OF_MONTH);
+
+        int style = R.style.Theme_MaterialComponents_DayNight_Dialog;
+
+        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, ano, mes, dia);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+    }
+
+    private  String makeDateString(int year, int month, int day) {
+        String dia = day > 10 ? day + "" : "0" + day;
+        String mes = month > 10 ? month + "" : "0" + month;
+
+        return dia + "/" + mes + "/" + year;
+    }
+
+    public void OpenDatePicker(View view) {
+        datePickerDialog.show();
+    }
 
     public void salvar(View view) {
         Intent homeIntent = new Intent(CadastroAtendimentoAcitivity.this, HomeActivity.class);
@@ -75,7 +126,7 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
         String descricao = etDescricao.getText().toString();
         String valorStr = etValor.getText().toString();
         String observacao = etObservacao.getText().toString();
-        String horarioStr = etAgendamento.getText().toString();
+        String dataStr = etAgendamento.getText().toString();
 
         Date horario = new Date();
         Double valor = 0d;
@@ -83,7 +134,7 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
         if (nomeCLiente.isEmpty()
                 || descricao.isEmpty()
                 || valorStr.isEmpty()
-                || horarioStr.isEmpty()
+                || dataStr.isEmpty()
         ) {
             Snackbar snackbar = Snackbar.make(view, erros[0], Snackbar.LENGTH_SHORT);
             snackbar.setBackgroundTint(Color.WHITE);
@@ -93,7 +144,7 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
             valor = Double.parseDouble(valorStr);
 
             try {
-                horario = new SimpleDateFormat("dd/MM/yyyy HH:MM").parse(horarioStr);
+                horario = new SimpleDateFormat("dd/MM/yyyy").parse(dataStr);
             } catch (ParseException e) {
                 Snackbar snackbar = Snackbar.make(view, erros[1], Snackbar.LENGTH_SHORT);
                 snackbar.setBackgroundTint(Color.WHITE);
@@ -101,22 +152,15 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
                 snackbar.show();
             }
 
-            if (horario.before(new Date())) {
-                Snackbar snackbar = Snackbar.make(view, erros[2], Snackbar.LENGTH_SHORT);
-                snackbar.setBackgroundTint(Color.WHITE);
-                snackbar.setTextColor(Color.BLACK);
-                snackbar.show();
-            } else {
-                Atendimento atendimento = new Atendimento(descricao, valor, horario, observacao, nomeCLiente, usuario);
-                daoAtendimento.insert(atendimento);
+            Atendimento atendimento = new Atendimento(descricao, valor, horario, observacao, nomeCLiente, usuario);
+            daoAtendimento.insert(atendimento);
 
-                Snackbar snackbar = Snackbar.make(view, "Agendado com sucesso!", Snackbar.LENGTH_SHORT);
-                snackbar.setBackgroundTint(Color.GRAY);
-                snackbar.setTextColor(Color.WHITE);
-                snackbar.show();
+            Snackbar snackbar = Snackbar.make(view, "Agendado com sucesso!", Snackbar.LENGTH_SHORT);
+            snackbar.setBackgroundTint(Color.GRAY);
+            snackbar.setTextColor(Color.WHITE);
+            snackbar.show();
 
-                startActivity(homeIntent);
-            }
+            startActivity(homeIntent);
         }
     }
 }

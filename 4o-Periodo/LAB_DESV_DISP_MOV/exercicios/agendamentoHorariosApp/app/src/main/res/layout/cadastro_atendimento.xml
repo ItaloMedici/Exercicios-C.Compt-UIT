@@ -136,23 +136,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-        <EditText
-            android:id="@+id/diaText"
-            style="@style/EditTextInput"
-            android:layout_width="340dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:ems="10"
-            android:inputType="date"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title3"
-            android:hint="@string/data" />
-
-
         <TextView
             android:id="@+id/title3"
             android:layout_width="0dp"
@@ -167,6 +150,42 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/diaText"
+            style="@style/EditTextInput"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:ems="10"
+            android:hint="@string/data"
+            android:inputType="date"
+            android:onClick="OpenDatePicker"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/horaText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title3" />
+
+        <EditText
+            android:id="@+id/horaText"
+            style="@style/EditTextInput"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="12dp"
+            android:ems="10"
+            android:hint="@string/data"
+            android:inputType="date"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/diaText"
+            app:layout_constraintTop_toBottomOf="@+id/title3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
