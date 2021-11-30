@@ -1,11 +1,13 @@
 package com.example.agendamentohorarios;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +26,7 @@ public class HomeActivity extends AppCompatActivity {
     private ImageButton btnLogOut;
     private ImageButton btnCadastrarAtendimento;
     private static Usuario usuario = new Usuario();
+    ListView cardList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +47,13 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         DAOAtendimento daoAtendimento = new DAOAtendimento(this);
-        inserirAtendimentosTeste(daoAtendimento);
+        //inserirAtendimentosTeste(daoAtendimento);
 
         List<Atendimento> atendimentos = daoAtendimento.searchByIdUsuario(usuario);
 
-        AtendimentoAdapter adapter = new AtendimentoAdapter(getApplicationContext(), R.id.card_list, atendimentos);
+        AtendimentoAdapter adapter = new AtendimentoAdapter(getApplicationContext(), atendimentos);
+
+        cardList.setAdapter(adapter);
 
         btnLogOut.setOnClickListener(this::logOut);
         btnCadastrarAtendimento.setOnClickListener(this::cadastrarAtendimento);
@@ -57,6 +62,7 @@ public class HomeActivity extends AppCompatActivity {
     private void initComponents() {
         btnLogOut = (ImageButton) findViewById(R.id.logout);
         btnCadastrarAtendimento = (ImageButton) findViewById(R.id.btnAddAtendimento);
+        cardList = (ListView) findViewById(R.id.card_list);
 
     }
 
@@ -67,6 +73,10 @@ public class HomeActivity extends AppCompatActivity {
 
     public void cadastrarAtendimento(View view) {
         Intent cadastroIntent =  new Intent(HomeActivity.this, CadastroAtendimentoAcitivity.class);
+
+        cadastroIntent.putExtra("idUsuario", usuario.getIdentificador());
+        cadastroIntent.putExtra("email", usuario.getEmail());
+
         startActivity(cadastroIntent);
     }
 

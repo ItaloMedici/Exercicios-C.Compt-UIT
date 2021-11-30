@@ -65,6 +65,8 @@ public class DAOUsuario extends DBUtils {
             String email = c.getString(c.getColumnIndexOrThrow(colunas[EMAIL]));
 
             Usuario u = new Usuario(id, nome, email);
+
+            usuarios.add(u);
         }
 
         return usuarios;
@@ -97,8 +99,6 @@ public class DAOUsuario extends DBUtils {
         }
 
         return null;
-
-        //return c.getCount() > 0;
     }
 
     public Long getIDByEmail(String email) {

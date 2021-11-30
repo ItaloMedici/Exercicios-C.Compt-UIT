@@ -6,4 +6,9 @@
     <string name="entrarTitle">Entrar</string>
     <string name="senhaButton">Senha</string>
     <string name="emailInput">Email</string>
+    <string name="nome_cliente">Nome Cliente</string>
+    <string name="descri_o_servi_o">Descrição Serviço</string>
+    <string name="observa_o">Observação</string>
+    <string name="data">Data</string>
+    <string name="valor">Valor</string>
 </resources>

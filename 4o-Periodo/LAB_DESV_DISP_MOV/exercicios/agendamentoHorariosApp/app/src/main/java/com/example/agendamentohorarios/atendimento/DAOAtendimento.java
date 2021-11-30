@@ -82,7 +82,7 @@ public class DAOAtendimento extends DBUtils {
         Cursor c = database.query(
                 table, colunas,
                 whereClause, whereArgs,
-                null, null, colunas[HORARIO] + " DESC"
+                null, null, colunas[HORARIO]
         );
 
         while (c.moveToNext()) {

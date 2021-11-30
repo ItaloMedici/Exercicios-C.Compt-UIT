@@ -17,15 +17,16 @@ import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-public class AtendimentoAdapter extends ArrayAdapter<Atendimento> {
+public class AtendimentoAdapter extends BaseAdapter {
 
     private Context context;
     private List<Atendimento> atendimentos;
+    private Date dateAux = new Date(2020, 1, 1);
 
-    public AtendimentoAdapter(Context context, int resource, List<Atendimento> atendimentos) {
-        super(context,resource);
+    public AtendimentoAdapter(Context context, List<Atendimento> atendimentos) {
         this.context = context;
         this.atendimentos = atendimentos;
     }
@@ -55,20 +56,32 @@ public class AtendimentoAdapter extends ArrayAdapter<Atendimento> {
         TextView nomeCli = (TextView) layout.findViewById(R.id.nomeCliente);
         TextView hora = (TextView) layout.findViewById(R.id.hora);
         TextView descricao = (TextView) layout.findViewById(R.id.descricao);
+        TextView dataTitulo = (TextView) layout.findViewById(R.id.dataTitulo);
         TextView valor = (TextView) layout.findViewById(R.id.valor);
-        ConstraintLayout card = (ConstraintLayout) layout.findViewById(R.id.card);
+        LinearLayout card = (LinearLayout) layout.findViewById(R.id.card);
 
         Atendimento atendimento = atendimentos.get(indexAux);
+
+        String dataStr = new SimpleDateFormat("dd/MM/yyyy").format(atendimento.getHorario());
+        String dataStrAux = new SimpleDateFormat("dd/MM/yyyy").format(dateAux);
+
+        if (!dataStr.equals(dataStrAux)) {
+            dateAux = atendimento.getHorario();
+            dataTitulo.setVisibility(View.VISIBLE);
+        } else {
+            dataTitulo.setVisibility(View.GONE);
+        }
 
         nomeCli.setText(atendimento.getNomeCliente());
         hora.setText(new SimpleDateFormat("HH:MM").format(atendimento.getHorario()));
         descricao.setText(atendimento.getDescricao());
-        valor.setText(new DecimalFormat("¤ #,##0.00;").format(atendimento.getNomeCliente()));
+        valor.setText(new DecimalFormat("¤ #,##0.00;").format(atendimento.getValor()));
+        dataTitulo.setText(dataStr);
 
         card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                System.out.println("CLICOU");
             }
         });
 

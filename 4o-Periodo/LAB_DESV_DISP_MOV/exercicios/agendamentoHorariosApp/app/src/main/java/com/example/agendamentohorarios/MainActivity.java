@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Intent homeIntent = new Intent(this, HomeActivity.class);
         DAOUsuario db = new DAOUsuario(this);
 
-        inserirUsuarioTeste(db);
+        //inserirUsuarioTeste(db);
 
         Usuario usuario =  new Usuario();
         String email = emailEt.getText().toString();
