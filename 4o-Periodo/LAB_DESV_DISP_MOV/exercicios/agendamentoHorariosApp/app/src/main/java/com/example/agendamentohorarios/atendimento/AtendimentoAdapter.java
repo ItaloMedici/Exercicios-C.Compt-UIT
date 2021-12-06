@@ -12,8 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.agendamentohorarios.R;
+import com.example.agendamentohorarios.ToolDate;
 
 import org.w3c.dom.Text;
 
@@ -64,8 +66,8 @@ public class AtendimentoAdapter extends BaseAdapter {
 
         Atendimento atendimento = atendimentos.get(indexAux);
 
-        String dataStr = new SimpleDateFormat("dd/MM/yyyy").format(atendimento.getHorario());
-        String dataStrAux = new SimpleDateFormat("dd/MM/yyyy").format(dateAux);
+        String dataStr = ToolDate.dateToStr(atendimento.getHorario(), ToolDate.DATA);
+        String dataStrAux = ToolDate.dateToStr(dateAux, ToolDate.DATA);
 
         if (!dataStr.equals(dataStrAux)) {
             dateAux = atendimento.getHorario();
@@ -75,7 +77,10 @@ public class AtendimentoAdapter extends BaseAdapter {
         }
 
         nomeCli.setText(atendimento.getNomeCliente());
-        hora.setText(new SimpleDateFormat("HH:MM").format(atendimento.getHorario()));
+
+        String s = ToolDate.dateToStr(atendimento.getHorario(), ToolDate.HORA);
+
+        hora.setText(s);
         descricao.setText(atendimento.getDescricao());
         valor.setText(new DecimalFormat("¤ #,##0.00;").format(atendimento.getValor()));
         dataTitulo.setText(dataStr);
@@ -83,7 +88,8 @@ public class AtendimentoAdapter extends BaseAdapter {
         card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("CLICOU");
+                AtendimentoDialogFragment atdDialog = new AtendimentoDialogFragment();
+                //atdDialog.show(atdDialog.getFragmentManager(), "atendimento");
             }
         });
 

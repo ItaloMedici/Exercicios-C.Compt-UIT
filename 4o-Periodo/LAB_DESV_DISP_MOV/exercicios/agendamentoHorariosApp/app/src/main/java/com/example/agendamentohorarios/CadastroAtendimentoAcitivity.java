@@ -1,14 +1,14 @@
 package com.example.agendamentohorarios;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toolbar;
+import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +19,6 @@ import com.example.agendamentohorarios.usuario.Usuario;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,12 +34,14 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
 
+    int hour;
+    int min;
+
     private static Usuario usuario = new Usuario();
 
-    String[] erros = {
+    static final  String[] messages = {
             "Preencha todos os campos corretamente",
-            "Data inválida",
-            "Não é possivel inserir data anterior ao dia de hoje!",
+            "Agendado com sucesso!",
     };
 
     @Override
@@ -52,7 +52,7 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
         initCompoenents();
         initDatePicker();
 
-        btnSave.setOnClickListener(view -> salvar(view));
+        btnSave.setOnClickListener(this::salvar);
     }
 
     private void initCompoenents() {
@@ -83,7 +83,7 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
         int mes = calendar.get(Calendar.MONTH);
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
 
-        return makeDateString(ano, mes + 1, dia);
+        return ToolDate.makeDateString(ano, mes + 1, dia);
     }
 
 
@@ -91,7 +91,7 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String date = makeDateString(year, month + 1, dayOfMonth);
+                String date = ToolDate.makeDateString(year, month + 1, dayOfMonth);
                 etAgendamento.setText(date);
             }
         };
@@ -101,21 +101,27 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
         int mes = calendar.get(Calendar.MONTH);
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
 
-        int style = R.style.Theme_MaterialComponents_DayNight_Dialog;
-
-        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, ano, mes, dia);
+        datePickerDialog = new DatePickerDialog(this, dateSetListener, ano, mes, dia);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
     }
 
-    private  String makeDateString(int year, int month, int day) {
-        String dia = day > 10 ? day + "" : "0" + day;
-        String mes = month > 10 ? month + "" : "0" + month;
-
-        return dia + "/" + mes + "/" + year;
+    public void openDatePicker(View view) {
+        datePickerDialog.show();
     }
 
-    public void OpenDatePicker(View view) {
-        datePickerDialog.show();
+    public void openHourPicker(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                hour = selectedHour;
+                min = selectedMinute;
+
+                etHorario.setText(ToolDate.makeHourString(hour, min));
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, min, true);
+        timePickerDialog.show();
     }
 
     public void salvar(View view) {
@@ -127,35 +133,29 @@ public class CadastroAtendimentoAcitivity extends AppCompatActivity {
         String valorStr = etValor.getText().toString();
         String observacao = etObservacao.getText().toString();
         String dataStr = etAgendamento.getText().toString();
+        String horarioStr = etHorario.getText().toString();
 
-        Date horario = new Date();
         Double valor = 0d;
 
         if (nomeCLiente.isEmpty()
                 || descricao.isEmpty()
                 || valorStr.isEmpty()
                 || dataStr.isEmpty()
+                || horarioStr.isEmpty()
         ) {
-            Snackbar snackbar = Snackbar.make(view, erros[0], Snackbar.LENGTH_SHORT);
+            Snackbar snackbar = Snackbar.make(view, messages[0], Snackbar.LENGTH_SHORT);
             snackbar.setBackgroundTint(Color.WHITE);
             snackbar.setTextColor(Color.BLACK);
             snackbar.show();
         } else {
             valor = Double.parseDouble(valorStr);
 
-            try {
-                horario = new SimpleDateFormat("dd/MM/yyyy").parse(dataStr);
-            } catch (ParseException e) {
-                Snackbar snackbar = Snackbar.make(view, erros[1], Snackbar.LENGTH_SHORT);
-                snackbar.setBackgroundTint(Color.WHITE);
-                snackbar.setTextColor(Color.BLACK);
-                snackbar.show();
-            }
+            Date horario = ToolDate.strToDateComplete(dataStr, horarioStr);
 
             Atendimento atendimento = new Atendimento(descricao, valor, horario, observacao, nomeCLiente, usuario);
             daoAtendimento.insert(atendimento);
 
-            Snackbar snackbar = Snackbar.make(view, "Agendado com sucesso!", Snackbar.LENGTH_SHORT);
+            Snackbar snackbar = Snackbar.make(view, messages[1], Snackbar.LENGTH_SHORT);
             snackbar.setBackgroundTint(Color.GRAY);
             snackbar.setTextColor(Color.WHITE);
             snackbar.show();

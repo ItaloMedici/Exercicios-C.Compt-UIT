@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.agendamentohorarios.DBUtils;
+import com.example.agendamentohorarios.ToolDate;
 import com.example.agendamentohorarios.usuario.Usuario;
 
 import java.text.ParseException;
@@ -49,7 +50,7 @@ public class DAOAtendimento extends DBUtils {
         values.put(colunas[DESCRICAO], atd.getDescricao());
         values.put(colunas[NOME_CLIENTE], atd.getNomeCliente());
         values.put(colunas[VALOR], atd.getValor());
-        values.put(colunas[HORARIO], new SimpleDateFormat("dd/MM/yyyy HH:MM").format(atd.getHorario()));
+        values.put(colunas[HORARIO], ToolDate.dateToStr(atd.getHorario(), ToolDate.DATA_COMPLETA));
         values.put(colunas[OBSERVACAO], atd.getObservacao());
         values.put(colunas[ID_USUARIO], atd.getUsuario().getIdentificador());
 
