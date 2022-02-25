@@ -22,3 +22,6 @@ Nessa pagina é possivel encontar os exercícios propostos no decorrer do curso 
 - [BANCO DE DADOS I](https://github.com/ItaloMedici/Exercicios-C.Compt-UIT/tree/main/4o-Periodo/BANCO_DADOS_I)
 - [ENGENHARIA DE SOFTWARE I](https://github.com/ItaloMedici/Exercicios-C.Compt-UIT/tree/main/4o-Periodo/ENG_SOFTWARE_I)
  
+## Quinto Período
+
+- [PAA - PROJETO E ANALISE DE ALGORITMOS](https://github.com/ItaloMedici/Exercicios-C.Compt-UIT/tree/main/5o-Periodo/PAA)
