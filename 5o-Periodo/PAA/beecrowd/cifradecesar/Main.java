@@ -16,6 +16,7 @@ public class Main {
       s.nextLine();
       String msg = s.nextLine();
       int chave = s.nextInt();
+      msg.toUpperCase();
 
       char[] msgCript = new char[50];
 
