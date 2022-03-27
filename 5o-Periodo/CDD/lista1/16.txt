@@ -1,0 +1,2 @@
+Leia um texto de um arquivo e crie um dicionário que conte o número de vezes que cada
+letra apareceu no texto
