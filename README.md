@@ -25,3 +25,4 @@ Nessa pagina é possivel encontar os exercícios propostos no decorrer do curso 
 ## Quinto Período
 
 - [PAA - PROJETO E ANALISE DE ALGORITMOS](https://github.com/ItaloMedici/Exercicios-C.Compt-UIT/tree/main/5o-Periodo/PAA)
+- [CDD - CIÊNCIA DOS DADOS](https://github.com/ItaloMedici/Exercicios-C.Compt-UIT/tree/main/5o-Periodo/CDD)
