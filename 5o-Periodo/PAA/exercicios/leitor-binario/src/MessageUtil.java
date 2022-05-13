@@ -17,6 +17,6 @@ public class MessageUtil {
     }
 
     public static void arquivoExcluido() {
-        System.out.println("Arquico Excluido!");
+        System.out.println("Arquivo Excluido!");
     }
 }
