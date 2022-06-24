@@ -22,9 +22,11 @@ class HashTable {
 bool HashTable::isEmpty() {
   int sum{};
 
+  // Verificamos se a tabela está vazia somando os tamanhos das listas 
   for (int i{}; i < n; i++)
     sum += table[i].size();  
 
+  // Se 0 então true se > 0 então false
   return !sum;
 }
 
@@ -33,16 +35,23 @@ int HashTable::getHash(int key) {
   return key % n;
 }
 
+// Insereo item através da chave
 void HashTable::insertItem(int key, string value) {
   int hash = getHash(key);
+
+  // Acessa a linha com o indice gerado pelo hash
   auto& cell = table[hash];
 
+  // Inicia um interator no começo da lista
   auto interator = begin(cell);
   bool exists = false;
 
+  // Percorre a lista verificando se já existe um CIU duplicado
   for (; interator != end(cell); interator++) {
     if (interator->first == key) {
       exists = true;
+
+      // Se existe, sobrescrevemos o valor
       interator->second = value;
 
       cout << "CIU ja existe, Aluno foi substituido" << endl;
@@ -50,6 +59,7 @@ void HashTable::insertItem(int key, string value) {
     }
   }
 
+  // Se não existir, adiciona no final da lista
   if (!exists) {
     cell.emplace_back(key, value);
   }
@@ -57,16 +67,22 @@ void HashTable::insertItem(int key, string value) {
   return;
 }
 
+// Remove um intem apatir do CIU
 void HashTable::removeItem(int key) {
   int hash = getHash(key);
+
+  // Acessa a linha com o indice gerado pelo hash
   auto& cell = table[hash];
 
+  // Inicia um interator no começo da lista
   auto interator = begin(cell);
   bool exists = false;
 
+  // Percorre a lista verificando se realmente existe esse CIU
   for (; interator != end(cell); interator++) {
     if (interator->first == key) {
       exists = true;
+      // Se existe, removemos esse aluno da lista
       interator = cell.erase(interator);
       cout << "CIU encontrada, Aluno foi removido!" << endl;
       break;
@@ -83,16 +99,20 @@ void HashTable::removeItem(int key) {
 void HashTable::print() {
   if (isEmpty()) return;
 
+  // Percorremos a tabela
   for (int i = 0; i < n; i++) {
     cout << i << " = ";
 
+    // Se não houver dados na lista ele sai
     if (table[i].size() == 0) {
       cout << endl;
       continue;
     };
 
+    // Percorremos a lista com dados
     auto interator = table[i].begin();
     for (; interator != table[i].end(); interator++) {
+      // Para cada Aluno na lista imprimimos
       cout << "| CIU: " << interator->first << " Aluno: " << interator-> second << " | -> " ;
     }
 
@@ -102,14 +122,18 @@ void HashTable::print() {
 
 string HashTable::search(int key) {
   int hash = getHash(key);
+
+  // Acessa a linha com o indice gerado pelo hash
   auto& cell = table[hash];
 
   auto interator = begin(cell);
   bool found = false;
 
+  // Percorremos a lista até o final e verificamos se é a mesma chave
   for (; interator != end(cell); interator++) {
     if (interator->first == key) {
       found = true;
+      // Se encontrou retorna esse aluno
       return interator->second;
     }
   }
