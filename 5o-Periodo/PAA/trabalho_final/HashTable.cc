@@ -15,6 +15,7 @@ class HashTable {
     int getHash(int key);
     void insertItem(int key, string value);
     void removeItem(int key);
+    string search(int key);
     void print();
 };
 
@@ -44,7 +45,7 @@ void HashTable::insertItem(int key, string value) {
       exists = true;
       interator->second = value;
 
-      cout << "Chave ja existe, valor foi substituido" << endl;
+      cout << "CIU ja existe, Aluno foi substituido" << endl;
       break;
     }
   }
@@ -67,13 +68,13 @@ void HashTable::removeItem(int key) {
     if (interator->first == key) {
       exists = true;
       interator = cell.erase(interator);
-      cout << "Chave encontrada, valor foi removido!" << endl;
+      cout << "CIU encontrada, Aluno foi removido!" << endl;
       break;
     }
   }
 
   if (!exists) {
-    cout << "Chave nao encontrada, valor nao foi removido!" << endl;
+    cout << "CIU nao encontrada, Aluno nao foi removido!" << endl;
   }
 
   return;
@@ -92,11 +93,28 @@ void HashTable::print() {
 
     auto interator = table[i].begin();
     for (; interator != table[i].end(); interator++) {
-      cout << "| Chave: " << interator->first << " Valor: " << interator-> second << " | -> " ;
+      cout << "| CIU: " << interator->first << " Aluno: " << interator-> second << " | -> " ;
     }
 
     cout << endl;
   }
+}
+
+string HashTable::search(int key) {
+  int hash = getHash(key);
+  auto& cell = table[hash];
+
+  auto interator = begin(cell);
+  bool found = false;
+
+  for (; interator != end(cell); interator++) {
+    if (interator->first == key) {
+      found = true;
+      return interator->second;
+    }
+  }
+
+  return "";
 }
 
 int main(int argc, char const *argv[]) {
@@ -107,16 +125,28 @@ int main(int argc, char const *argv[]) {
   hashTable.insertItem(36978, "Isis");
   hashTable.insertItem(23228, "Aim");
   hashTable.insertItem(23228, "Aimee");
+  hashTable.insertItem(85478, "Daniel");
 
   hashTable.print();
 
   hashTable.removeItem(85477);
-  cout << endl << "Removendo Joao" << endl;
+  hashTable.removeItem(23228);
+  cout << endl << "Removendo Joao e Aimee" << endl;
   hashTable.print();
 
   hashTable.insertItem(22, "Joao Paulo");
-  cout << endl << "Adicionando outro Joao" << endl;
+  hashTable.insertItem(134, "Aimee");
+  cout << endl << "Adicionando outro Joao e Aimee" << endl;
   hashTable.print();
+
+  cout << endl << "Procurando CIU 36978" << endl;
+  string found = hashTable.search(36988);
+
+  if (found != "") {
+    cout << " Aluno: " << found << endl;
+  } else {
+    cout << " Aluno nao encontrado" << endl;
+  }
 
   return 0;
 }
