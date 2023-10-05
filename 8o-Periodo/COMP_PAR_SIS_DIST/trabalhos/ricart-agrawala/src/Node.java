@@ -17,7 +17,7 @@ public class Node {
     }
 
     public void updateClock() {
-        this.clock += getTimestamp();
+        this.clock = getTimestamp() + 1;
     }
 
     public int getID() {
